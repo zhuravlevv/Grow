@@ -2,6 +2,8 @@ package com.epam.impl;
 
 import com.epam.Department;
 import com.epam.DepartmentDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -17,6 +19,8 @@ import java.util.Optional;
 public class DepartmentDaoImpl implements DepartmentDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentDaoImpl.class);
 
     @Value("${department.selectAll.orderByName}")
     private String selectAll;
@@ -38,16 +42,19 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
     public List<Department> getAll() {
+        LOGGER.trace("Get all departments");
         return namedParameterJdbcTemplate.query(selectAll, new DepartmentMapper());
     }
 
     public Optional<Department> getById(Integer id) {
+        LOGGER.trace("Get department with id = {}", id);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("id", id);
         return Optional.ofNullable(namedParameterJdbcTemplate.queryForObject(selectById, map, new DepartmentMapper()));
     }
 
     public Department update(Department department, Integer id) throws Exception {
+        LOGGER.trace("Update department with id: {} to {}", id, department);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("name", department.getName());
         map.addValue("id", id);
@@ -56,12 +63,14 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
     public void delete(Integer id) {
+        LOGGER.trace("Delete department with id: {}", id);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("id", id);
         namedParameterJdbcTemplate.update(delete, map);
     }
 
     public Department add(Department department) throws Exception {
+        LOGGER.trace("Add department: {}", department);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("name", department.getName());
         KeyHolder keyHolder = new GeneratedKeyHolder();
