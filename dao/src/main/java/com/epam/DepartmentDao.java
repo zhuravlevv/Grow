@@ -1,4 +1,6 @@
-package com.epam;
+package com.epam.inter;
+
+import com.epam.Department;
 
 import java.util.List;
 
