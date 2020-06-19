@@ -2,6 +2,7 @@ package com.epam.impl;
 
 import com.epam.Department;
 import com.epam.DepartmentDao;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
@@ -13,12 +14,27 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    @Value("${department.selectAll.orderByName}")
+    private String selectAll;
+
+    @Value("${department.insert}")
+    private String insert;
+
+    @Value("${department.selectById}")
+    private String selectById;
+
+    @Value("${department.update}")
+    private String update;
+
+    @Value("${department.delete}")
+    private String delete;
+
     public DepartmentDaoImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
     public List<Department> getAll() {
-        return namedParameterJdbcTemplate.query("select * from department d order by d.name", new DepartmentMapper());
+        return namedParameterJdbcTemplate.query(selectAll, new DepartmentMapper());
     }
 
     public Department getById(Integer id) {
