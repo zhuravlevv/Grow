@@ -1,4 +1,4 @@
-package com.epam.inter;
+package com.epam;
 
 import com.epam.Department;
 
