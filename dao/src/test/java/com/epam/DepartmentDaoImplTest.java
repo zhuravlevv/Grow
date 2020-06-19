@@ -26,6 +26,41 @@ public class DepartmentDaoImplTest {
         List<Department> departments = departmentDao.getAll();
         assertNotNull(departments);
     }
-    
+
+    @Test
+    public void add() throws Exception {
+        Department department = new Department();
+        department.setName("department1");
+        Department resDepartment = departmentDao.add(department);
+        department.setId(1);
+        Assert.assertEquals(department, resDepartment);
+    }
+
+    @Test
+    public void getById() throws Exception {
+        Department department = new Department();
+        department.setName("department");
+
+        departmentDao.add(department);
+
+        Department returnedDepartment = departmentDao.getById(1).orElseThrow(Exception::new);
+
+        Assert.assertEquals(returnedDepartment.getName(), "department");
+        Assert.assertEquals(returnedDepartment.getId(), new Integer(1));
+    }
+
+    @Test
+    public void update() throws Exception {
+        Department department1 = new Department();
+        department1.setName("department1");
+
+        Department department2 = new Department();
+        department2.setName("department2");
+
+        departmentDao.add(department1);
+        Department department = departmentDao.update(department2, 1);
+
+        Assert.assertEquals(department.getName(), "department2");
+    }
 
 }
