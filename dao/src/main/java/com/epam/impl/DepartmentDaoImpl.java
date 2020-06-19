@@ -69,7 +69,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         return getById((Integer) keyHolder.getKey()).orElseThrow(Exception::new);
     }
 
-    private class DepartmentMapper implements RowMapper<Department> {
+    private static class DepartmentMapper implements RowMapper<Department> {
 
         public Department mapRow(ResultSet resultSet, int i) throws SQLException {
             Department department = new Department();
