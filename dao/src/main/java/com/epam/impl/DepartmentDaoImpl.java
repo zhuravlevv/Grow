@@ -4,11 +4,15 @@ import com.epam.Department;
 import com.epam.DepartmentDao;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class DepartmentDaoImpl implements DepartmentDao {
 
@@ -37,20 +41,32 @@ public class DepartmentDaoImpl implements DepartmentDao {
         return namedParameterJdbcTemplate.query(selectAll, new DepartmentMapper());
     }
 
-    public Department getById(Integer id) {
-        return null;
+    public Optional<Department> getById(Integer id) {
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("id", id);
+        return Optional.ofNullable(namedParameterJdbcTemplate.queryForObject(selectById, map, new DepartmentMapper()));
     }
 
-    public void update(Department department, Integer id) {
-
+    public Department update(Department department, Integer id) throws Exception {
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("name", department.getName());
+        map.addValue("id", id);
+        namedParameterJdbcTemplate.update(update ,map);
+        return getById(id).orElseThrow(Exception::new);
     }
 
     public void delete(Integer id) {
-
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("id", id);
+        namedParameterJdbcTemplate.update(delete, map);
     }
 
-    public Department add(Department department) {
-        return null;
+    public Department add(Department department) throws Exception {
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("name", department.getName());
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        namedParameterJdbcTemplate.update(update ,map, keyHolder);
+        return getById((Integer) keyHolder.getKey()).orElseThrow(Exception::new);
     }
 
     private class DepartmentMapper implements RowMapper<Department> {
