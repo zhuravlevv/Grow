@@ -9,9 +9,9 @@ public interface EmployeeDao {
 
     public Optional<Employee> getById(Integer id);
 
-    public Employee add(Employee employee);
+    public Employee add(Employee employee) throws Exception;
 
-    public Employee update(Employee employee, Integer id);
+    public Employee update(Employee employee, Integer id) throws Exception;
 
     public void delete(Integer id);
 }
