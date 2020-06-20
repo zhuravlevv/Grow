@@ -5,6 +5,7 @@ import com.epam.DepartmentDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -50,7 +51,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         LOGGER.trace("Get department with id = {}", id);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("id", id);
-        return Optional.ofNullable(namedParameterJdbcTemplate.queryForObject(selectById, map, new DepartmentMapper()));
+        return Optional.ofNullable(DataAccessUtils.uniqueResult(namedParameterJdbcTemplate.query(selectById, map, new DepartmentMapper())));
     }
 
     public Department update(Department department, Integer id) throws Exception {

@@ -1,7 +1,5 @@
 package com.epam;
 
-import com.epam.Department;
-import com.epam.DepartmentDao;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,8 +8,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml", "classpath:dao.xml"})
@@ -23,7 +19,7 @@ public class DepartmentDaoImplTest {
     @Test
     public void getAll(){
         List<Department> departments = departmentDao.getAll();
-        assertNotNull(departments);
+        Assert.assertNotNull(departments);
     }
 
     @Test
@@ -60,6 +56,18 @@ public class DepartmentDaoImplTest {
         Department department = departmentDao.update(department2, addedDepartment.getId());
 
         Assert.assertEquals(department.getName(), "department2");
+    }
+
+    @Test
+    public void delete() throws Exception {
+        Department department = new Department();
+        department.setName("department");
+
+        Department addedDepartment = departmentDao.add(department);
+
+        departmentDao.delete(addedDepartment.getId());
+
+        Assert.assertFalse(departmentDao.getById(addedDepartment.getId()).isPresent());
     }
 
 }

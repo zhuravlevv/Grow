@@ -4,6 +4,7 @@ import com.epam.Employee;
 import com.epam.EmployeeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -47,7 +48,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public Optional<Employee> getById(Integer id) {
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("id",id);
-        return Optional.ofNullable(namedParameterJdbcTemplate.queryForObject(selectById,map,new EmployeeMapper()));
+        return Optional.ofNullable(DataAccessUtils.uniqueResult(namedParameterJdbcTemplate.query(selectById,map,new EmployeeMapper())));
     }
 
     @Override
