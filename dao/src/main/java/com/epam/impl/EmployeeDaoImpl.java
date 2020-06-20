@@ -2,7 +2,8 @@ package com.epam.impl;
 
 import com.epam.Employee;
 import com.epam.EmployeeDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.RowMapper;
@@ -19,6 +20,8 @@ import java.util.Optional;
 public class EmployeeDaoImpl implements EmployeeDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeDaoImpl.class);
 
     @Value("${employee.selectAll.orderByLastNameAndFirstName}")
     private String selectAll;
@@ -41,11 +44,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public List<Employee> getAll() {
+        LOGGER.trace("Get all employees");
         return namedParameterJdbcTemplate.query(selectAll, new EmployeeMapper());
     }
 
     @Override
     public Optional<Employee> getById(Integer id) {
+        LOGGER.trace("Get employee with id = {}", id);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("id",id);
         return Optional.ofNullable(DataAccessUtils.uniqueResult(namedParameterJdbcTemplate.query(selectById,map,new EmployeeMapper())));
@@ -53,6 +58,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee add(Employee employee) throws Exception {
+        LOGGER.trace("Add employee: {}", employee);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("first_name", employee.getFirstName());
         map.addValue("last_name", employee.getLastName());
@@ -65,6 +71,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee update(Employee employee, Integer id) throws Exception {
+        LOGGER.trace("Update employee with id: {} to {}", id, employee);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("first_name", employee.getFirstName());
         map.addValue("last_name", employee.getLastName());
@@ -77,6 +84,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public void delete(Integer id) {
+        LOGGER.trace("Delete employee with id: {}", id);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("id", id);
         namedParameterJdbcTemplate.update(delete, map);
