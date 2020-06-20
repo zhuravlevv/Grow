@@ -20,7 +20,6 @@ public class DepartmentDaoImplTest {
     @Autowired
     private DepartmentDao departmentDao;
 
-
     @Test
     public void getAll(){
         List<Department> departments = departmentDao.getAll();
@@ -32,8 +31,8 @@ public class DepartmentDaoImplTest {
         Department department = new Department();
         department.setName("department1");
         Department resDepartment = departmentDao.add(department);
-        department.setId(1);
-        Assert.assertEquals(department, resDepartment);
+        Department searchDepartment = departmentDao.getById(resDepartment.getId()).orElseThrow(Exception::new);
+        Assert.assertEquals(searchDepartment, resDepartment);
     }
 
     @Test
@@ -41,12 +40,12 @@ public class DepartmentDaoImplTest {
         Department department = new Department();
         department.setName("department");
 
-        departmentDao.add(department);
+        Department addedDepartment = departmentDao.add(department);
 
-        Department returnedDepartment = departmentDao.getById(1).orElseThrow(Exception::new);
+        Department returnedDepartment = departmentDao.getById(addedDepartment.getId()).orElseThrow(Exception::new);
 
         Assert.assertEquals(returnedDepartment.getName(), "department");
-        Assert.assertEquals(returnedDepartment.getId(), new Integer(1));
+        Assert.assertEquals(returnedDepartment.getId(), addedDepartment.getId());
     }
 
     @Test
@@ -57,8 +56,8 @@ public class DepartmentDaoImplTest {
         Department department2 = new Department();
         department2.setName("department2");
 
-        departmentDao.add(department1);
-        Department department = departmentDao.update(department2, 1);
+        Department addedDepartment = departmentDao.add(department1);
+        Department department = departmentDao.update(department2, addedDepartment.getId());
 
         Assert.assertEquals(department.getName(), "department2");
     }
