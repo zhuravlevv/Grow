@@ -35,6 +35,6 @@ class HomeControllerTest {
                 MockMvcRequestBuilders.get("/")
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isFound())
-                .andExpect(MockMvcResultMatchers.redirectedUrl("hello"));
+                .andExpect(MockMvcResultMatchers.redirectedUrl("departments"));
     }
 }
