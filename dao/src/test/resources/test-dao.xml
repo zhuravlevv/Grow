@@ -12,6 +12,10 @@
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
 
+    <bean id="departmentDtoDao" class="com.epam.impl.DepartmentDtoDaoImpl">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
+
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
         <constructor-arg ref="dataSource"/>
     </bean>
