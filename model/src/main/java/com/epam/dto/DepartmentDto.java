@@ -32,6 +32,14 @@ public class DepartmentDto {
         this.averageSalary = averageSalary;
     }
 
+    public DepartmentDto() {
+    }
+
+    public DepartmentDto(String name, Double averageSalary) {
+        this.name = name;
+        this.averageSalary = averageSalary;
+    }
+
     @Override
     public String toString() {
         return "DepartmentDto{" +
