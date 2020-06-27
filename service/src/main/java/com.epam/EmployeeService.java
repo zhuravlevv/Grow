@@ -1,18 +1,17 @@
 package com.epam;
 
-import com.epam.Employee;
-
 import java.util.List;
+import java.util.Optional;
 
 public interface EmployeeService {
 
     public List<Employee> getAll();
 
-    public Employee getById(Integer id);
+    public Optional<Employee> getById(Integer id);
 
-    public Employee add(Employee employee);
+    public Employee add(Employee employee) throws Exception;
 
-    public Employee update(Employee newEmployee, Integer id);
+    public Employee update(Employee newEmployee, Integer id) throws Exception;
 
     public void delete(Integer id);
 }

@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public class DepartmentServiceImpl implements DepartmentService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentServiceImpl.class);
 
     private final DepartmentDao departmentDao;
 
