@@ -8,17 +8,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.util.Assert;
 
 import java.util.LinkedList;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
-@ContextConfiguration(locations = {"classpath*:test-service.xml"})
-public class DepartmentDtoServiceTest {
+public class DepartmentDtoServiceImplMockTest {
 
     @InjectMocks
     private DepartmentDtoServiceImpl departmentDtoService;
