@@ -1,6 +1,6 @@
-package com.epam;
+package com.epam.dao;
 
-import com.epam.Department;
+import com.epam.model.Department;
 
 import java.util.List;
 import java.util.Optional;

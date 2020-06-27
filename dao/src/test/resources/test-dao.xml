@@ -4,15 +4,15 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
-    <bean id="employeeDao" class="com.epam.impl.EmployeeDaoImpl">
+    <bean id="employeeDao" class="com.epam.dao.impl.EmployeeDaoImpl">
         <constructor-arg ref = "jdbcTemplate"/>
     </bean>
 
-    <bean id="departmentDao" class="com.epam.impl.DepartmentDaoImpl">
+    <bean id="departmentDao" class="com.epam.dao.impl.DepartmentDaoImpl">
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
 
-    <bean id="departmentDtoDao" class="com.epam.impl.DepartmentDtoDaoImpl">
+    <bean id="departmentDtoDao" class="com.epam.dao.impl.DepartmentDtoDaoImpl">
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
 

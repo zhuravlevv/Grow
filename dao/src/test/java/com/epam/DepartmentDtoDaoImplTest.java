@@ -1,7 +1,8 @@
 package com.epam;
 
 
-import com.epam.dto.DepartmentDto;
+import com.epam.dao.DepartmentDtoDao;
+import com.epam.model.dto.DepartmentDto;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

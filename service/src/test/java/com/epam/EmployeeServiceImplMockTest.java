@@ -1,7 +1,8 @@
 package com.epam;
 
-import com.epam.impl.EmployeeDaoImpl;
-import com.epam.impl.EmployeeServiceImpl;
+import com.epam.dao.impl.EmployeeDaoImpl;
+import com.epam.model.Employee;
+import com.epam.service.impl.EmployeeServiceImpl;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

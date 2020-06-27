@@ -1,4 +1,4 @@
-package com.epam.dto;
+package com.epam.model.dto;
 
 public class DepartmentDto {
 

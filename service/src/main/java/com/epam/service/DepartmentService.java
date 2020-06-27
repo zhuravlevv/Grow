@@ -1,4 +1,6 @@
-package com.epam;
+package com.epam.service;
+
+import com.epam.model.Department;
 
 import java.util.List;
 import java.util.Optional;

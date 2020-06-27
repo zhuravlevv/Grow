@@ -1,7 +1,8 @@
 package com.epam;
 
-import com.epam.dto.DepartmentDto;
-import com.epam.impl.DepartmentDtoServiceImpl;
+import com.epam.dao.DepartmentDtoDao;
+import com.epam.model.dto.DepartmentDto;
+import com.epam.service.impl.DepartmentDtoServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

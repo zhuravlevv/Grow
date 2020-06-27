@@ -1,9 +1,11 @@
-package com.epam;
+package com.epam.service;
+
+import com.epam.model.Employee;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface EmployeeDao {
+public interface EmployeeService {
 
     public List<Employee> getAll();
 
@@ -11,7 +13,7 @@ public interface EmployeeDao {
 
     public Employee add(Employee employee) throws Exception;
 
-    public Employee update(Employee employee, Integer id) throws Exception;
+    public Employee update(Employee newEmployee, Integer id) throws Exception;
 
     public void delete(Integer id);
 }

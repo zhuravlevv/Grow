@@ -1,11 +1,10 @@
-package com.epam.impl;
+package com.epam.service.impl;
 
-import com.epam.DepartmentDtoDao;
-import com.epam.DepartmentDtoService;
-import com.epam.dto.DepartmentDto;
+import com.epam.dao.DepartmentDtoDao;
+import com.epam.model.dto.DepartmentDto;
+import com.epam.service.DepartmentDtoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

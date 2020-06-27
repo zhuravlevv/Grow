@@ -1,8 +1,8 @@
-package com.epam.impl;
+package com.epam.service.impl;
 
-import com.epam.Department;
-import com.epam.DepartmentDao;
-import com.epam.DepartmentService;
+import com.epam.dao.DepartmentDao;
+import com.epam.model.Department;
+import com.epam.service.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

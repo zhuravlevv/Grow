@@ -1,5 +1,7 @@
 package com.epam;
 
+import com.epam.dao.DepartmentDao;
+import com.epam.model.Department;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

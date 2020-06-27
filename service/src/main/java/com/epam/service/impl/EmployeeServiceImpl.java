@@ -1,8 +1,8 @@
-package com.epam.impl;
+package com.epam.service.impl;
 
-import com.epam.Employee;
-import com.epam.EmployeeDao;
-import com.epam.EmployeeService;
+import com.epam.dao.EmployeeDao;
+import com.epam.model.Employee;
+import com.epam.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

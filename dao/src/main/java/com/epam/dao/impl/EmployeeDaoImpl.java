@@ -1,7 +1,7 @@
-package com.epam.impl;
+package com.epam.dao.impl;
 
-import com.epam.Employee;
-import com.epam.EmployeeDao;
+import com.epam.dao.EmployeeDao;
+import com.epam.model.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
