@@ -31,27 +31,27 @@
         </property>
     </bean>
 
-    <bean id="departmentDao" class="com.epam.impl.DepartmentDaoImpl">
+    <bean id="departmentDao" class="com.epam.dao.impl.DepartmentDaoImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 
-    <bean id="departmentDtoDao" class="com.epam.impl.DepartmentDtoDaoImpl">
+    <bean id="departmentDtoDao" class="com.epam.dao.impl.DepartmentDtoDaoImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 
-    <bean id="employeeDao" class="com.epam.impl.EmployeeDaoImpl">
+    <bean id="employeeDao" class="com.epam.dao.impl.EmployeeDaoImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 
-    <bean id="departmentService" class="com.epam.impl.DepartmentServiceImpl">
+    <bean id="departmentService" class="com.epam.service.impl.DepartmentServiceImpl">
         <constructor-arg ref="departmentDao"/>
     </bean>
 
-    <bean id="departmentDtoService" class="com.epam.impl.DepartmentDtoServiceImpl">
+    <bean id="departmentDtoService" class="com.epam.service.impl.DepartmentDtoServiceImpl">
         <constructor-arg ref="departmentDtoDao"/>
     </bean>
 
-    <bean id="employeeService" class="com.epam.impl.EmployeeServiceImpl">
+    <bean id="employeeService" class="com.epam.service.impl.EmployeeServiceImpl">
         <constructor-arg ref="employeeDao"/>
     </bean>
 
