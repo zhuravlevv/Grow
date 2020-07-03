@@ -45,7 +45,8 @@
                                         class="btn btn-light btn-block"><i
                     class="fa fa-arrow-left"></i></a></li>
         </ul>
-        <span class="navbar-brand text-uppercase mr-auto">Edit department</span>
+        <span class="navbar-brand text-uppercase mr-auto"
+              th:text="${isNew} ? 'New department' : 'Edit department'">Edit department</span>
     </nav>
 </header>
 
@@ -55,13 +56,23 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <form >
+                        <form id="departmentForm"
+                              th:object="${department}"
+                              action="departments.html"
+                              th:action="@{${#httpServletRequest.servletPath}}"
+                              th:method="@{post}">
+
+                            <input id="field_departmentId"
+                                   type="hidden"
+                                   th:field="*{id}"/>
+
                             <div class="form-group">
                                 <label class="form-control-label"
                                        for="field_departmentName">Department Name</label>
                                 <input class="form-control "
                                        id="field_departmentName"
-                                       type="text" value="CEO"/>
+                                       type="text" value="CEO"
+                                       th:field="*{name}"/>
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label"
@@ -81,6 +92,7 @@
                                 <a href="departments.html"
                                    th:href="@{/departments}"
                                    class="btn btn-primary"
+                                   th:onclick="@{document.forms['departmentForm'].submit(); return false;}"
                                    title="Save department"
                                    data-toggle="tooltip"
                                    data-placement="top">
