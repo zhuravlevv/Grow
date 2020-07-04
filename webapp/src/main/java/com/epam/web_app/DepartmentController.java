@@ -36,6 +36,9 @@ public class DepartmentController {
 
     @GetMapping("/department")
     public final String gotoAddDepartmentPage(Model model) {
+        LOGGER.debug("gotoAddDepartmentPage({})", model);
+        model.addAttribute("isNew", true);
+        model.addAttribute("department", new Department());
         return "department";
     }
 
@@ -44,8 +47,8 @@ public class DepartmentController {
         LOGGER.debug("gotoEditDepartmentPage({}, {})", id, model);
         Optional<Department> optionalDepartment = departmentService.getById(id);
         if(optionalDepartment.isPresent()){
-            Department department = optionalDepartment.get() ;
-            System.out.println(department);
+            Department department = optionalDepartment.get();
+            model.addAttribute("isNew", false);
             model.addAttribute("department", department);
             return "department";
         }
