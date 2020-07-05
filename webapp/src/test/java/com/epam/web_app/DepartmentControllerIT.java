@@ -102,4 +102,5 @@ public class DepartmentControllerIT {
                 .andExpect(model().attribute("department", isA(Department.class)));
     }
 
+
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Optional;
 
@@ -53,6 +54,20 @@ public class DepartmentController {
             return "department";
         }
         return "redirect:departments";
+    }
+
+
+    @PostMapping(value = "/department")
+    public String addDepartment(Department department) {
+
+        LOGGER.debug("addDepartment({})", department);
+        try {
+            departmentService.add(department);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/departments";
     }
 
 }
