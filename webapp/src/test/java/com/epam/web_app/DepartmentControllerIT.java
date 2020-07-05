@@ -114,4 +114,14 @@ public class DepartmentControllerIT {
                 .andExpect(redirectedUrl("/departments"));
     }
 
+    @Test
+    public void shouldDeleteDepartment() throws Exception {
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/department/3/delete")
+        ).andExpect(status().isFound())
+                .andExpect(view().name("redirect:/departments"))
+                .andExpect(redirectedUrl("/departments"));
+    }
+
 }
