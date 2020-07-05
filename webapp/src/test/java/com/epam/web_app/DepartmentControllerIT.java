@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -17,9 +18,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.math.BigDecimal;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.hamcrest.Matchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @WebAppConfiguration
@@ -41,7 +41,7 @@ public class DepartmentControllerIT {
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/departments")
         ).andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("text/html;charset=UTF-8"))
                 .andExpect(view().name("departments"))
                 .andExpect(model().attribute("departments", hasItem(
@@ -72,7 +72,7 @@ public class DepartmentControllerIT {
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/department/1")
         ).andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("text/html;charset=UTF-8"))
                 .andExpect(view().name("department"))
                 .andExpect(model().attribute("isNew", is(false)))
@@ -86,7 +86,7 @@ public class DepartmentControllerIT {
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/department/99999")
         ).andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isFound())
+                .andExpect(status().isFound())
                 .andExpect(MockMvcResultMatchers.redirectedUrl("departments"));
     }
 
@@ -95,12 +95,23 @@ public class DepartmentControllerIT {
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/department")
         ).andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("text/html;charset=UTF-8"))
                 .andExpect(view().name("department"))
                 .andExpect(model().attribute("isNew", is(true)))
                 .andExpect(model().attribute("department", isA(Department.class)));
     }
 
+    @Test
+    public void shouldAddNewDepartment() throws Exception {
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/department")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("departmentName", "test")
+        ).andExpect(status().isFound())
+                .andExpect(view().name("redirect:/departments"))
+                .andExpect(redirectedUrl("/departments"));
+    }
 
 }
