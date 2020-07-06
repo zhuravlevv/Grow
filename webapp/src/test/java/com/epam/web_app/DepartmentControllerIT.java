@@ -158,4 +158,15 @@ public class DepartmentControllerIT {
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(view().name("department"));
     }
+
+    @Test
+    public void shouldRejectAddDepartmentOnLargeDepartmentName() throws Exception {
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/department")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("name", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+        ).andExpect(status().isOk())
+                .andExpect(view().name("department"));
+    }
 }
