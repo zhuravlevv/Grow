@@ -124,4 +124,38 @@ public class DepartmentControllerIT {
                 .andExpect(redirectedUrl("/departments"));
     }
 
+    @Test
+    public void shouldUpdateDepartmentAfterEdit() throws Exception {
+
+        Department department = new Department();
+        department.setName("test");
+        department.setId(1);
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/department/1")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("id", "1")
+                        .param("name", "test")
+                        .sessionAttr("department", department)
+        ).andExpect(status().isFound())
+                .andExpect(view().name("redirect:/departments"))
+                .andExpect(redirectedUrl("/departments"));
+    }
+
+    @Test
+    public void shouldRejectUpdateDepartmentOnLargeDepartmentName() throws Exception {
+
+        Department department = new Department();
+        department.setId(1);
+        department.setName("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/department/1")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("id", "1")
+                        .param("name", department.getName())
+                        .sessionAttr("department", department)
+        ).andDo(MockMvcResultHandlers.print())
+                .andExpect(view().name("department"));
+    }
 }

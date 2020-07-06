@@ -33,6 +33,11 @@
         </property>
     </bean>
 
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+          p:basename="/WEB-INF/messages">
+    </bean>
+
     <bean id="departmentDao" class="com.epam.dao.impl.DepartmentDaoImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>

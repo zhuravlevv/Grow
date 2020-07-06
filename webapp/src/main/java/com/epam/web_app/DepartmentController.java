@@ -3,15 +3,19 @@ package com.epam.web_app;
 import com.epam.model.Department;
 import com.epam.service.DepartmentDtoService;
 import com.epam.service.DepartmentService;
+import com.epam.web_app.validator.DepartmentValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.lang.model.util.ElementScanner6;
 import java.util.Optional;
 
 @Controller
@@ -22,6 +26,9 @@ public class DepartmentController {
     private final DepartmentDtoService departmentDtoService;
 
     private final DepartmentService departmentService;
+
+    @Autowired
+    DepartmentValidator departmentValidator;
 
     public DepartmentController(DepartmentDtoService departmentDtoService, DepartmentService departmentService) {
         this.departmentDtoService = departmentDtoService;
@@ -58,16 +65,21 @@ public class DepartmentController {
 
 
     @PostMapping(value = "/department")
-    public String addDepartment(Department department) {
+    public String addDepartment(Department department, BindingResult result) {
 
         LOGGER.debug("addDepartment({})", department);
-        try {
-            departmentService.add(department);
+        departmentValidator.validate(department, result);
+        if(result.hasErrors()){
+            return "department";
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        else {
+            try {
+                departmentService.add(department);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return "redirect:/departments";
         }
-        return "redirect:/departments";
     }
 
     @GetMapping(value = "/department/{id}/delete")
@@ -76,6 +88,24 @@ public class DepartmentController {
         LOGGER.debug("delete({},{})", id, model);
         departmentService.delete(id);
         return "redirect:/departments";
+    }
+
+    @PostMapping(value = "/department/{id}")
+    public String updateDepartment(@PathVariable Integer id, Department department, BindingResult result) {
+
+        LOGGER.debug("updateDepartment({})", department);
+        departmentValidator.validate(department, result);
+        if(result.hasErrors()){
+            return "department";
+        }
+        else{
+            try {
+                departmentService.update(department, id);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return "redirect:/departments";
+        }
     }
 
 }
