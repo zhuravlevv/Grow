@@ -100,6 +100,11 @@
             <artifactId>mockito-core</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
