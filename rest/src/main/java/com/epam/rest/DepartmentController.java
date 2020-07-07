@@ -56,6 +56,26 @@ public class DepartmentController {
         return ResponseEntity.badRequest().body(null);
     }
 
+    @PutMapping("/department/{id}")
+    public ResponseEntity<Department> update(@PathVariable Integer id, @RequestBody Department newDepartment){
+        if(newDepartment == null){
+            return ResponseEntity.badRequest().body(null);
+        }
+        try {
+            return ResponseEntity.ok(departmentService.update(newDepartment, id));
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/department/{id}")
+    public ResponseEntity<Department> delete(@PathVariable Integer id){
+        departmentService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }
