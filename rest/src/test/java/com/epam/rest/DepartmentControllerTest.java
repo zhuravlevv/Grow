@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.epam.rest.exception.CustomExceptionHandler.DEPARTMENT_NOT_FOUND;
-import static com.epam.rest.exception.CustomExceptionHandler.VALIDATION_ERROR;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -99,11 +98,8 @@ class DepartmentControllerTest {
         Department department1 = departmentService.create(department);
         assertNotNull(department1);
 
-//        Optional<Department> departmentOptional = departmentService.findById(department1.getId());
-//        assertTrue(departmentOptional.isPresent());
         Department department2 = new Department();
         department2.setName("department4");
-//        departmentOptional.get().setName("department");
 
         // when
         Department result = departmentService.update(department2, department1.getId());

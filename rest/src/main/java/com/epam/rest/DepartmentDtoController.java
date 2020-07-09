@@ -20,7 +20,7 @@ public class DepartmentDtoController {
         this.departmentDtoService = departmentDtoService;
     }
 
-    @GetMapping("/department/avg")
+    @GetMapping("/department_avg")
     public List<DepartmentDto> getAll(){
         LOGGER.trace("getAll()");
         return departmentDtoService.getAllWithAvgSalary();
