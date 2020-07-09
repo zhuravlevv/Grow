@@ -1,6 +1,7 @@
 package com.epam.rest;
 
 import com.epam.model.Department;
+import com.epam.rest.exception.DepartmentNotFoundException;
 import com.epam.service.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,12 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class DepartmentController {
 
-    private DepartmentService departmentService;
+    private final DepartmentService departmentService;
 
     private final Logger LOGGER = LoggerFactory.getLogger(DepartmentController.class);
 
@@ -32,13 +32,7 @@ public class DepartmentController {
     @GetMapping("/department/{id}")
     public ResponseEntity<Department> getById(@PathVariable Integer id){
         LOGGER.trace("getById({})", id);
-        try {
-            return ResponseEntity.ok(departmentService.getById(id).orElseThrow(Exception::new));
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(departmentService.getById(id).orElseThrow(()->new DepartmentNotFoundException(id)));
     }
 
     @PostMapping("/department")
@@ -76,6 +70,5 @@ public class DepartmentController {
         departmentService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 
 }
