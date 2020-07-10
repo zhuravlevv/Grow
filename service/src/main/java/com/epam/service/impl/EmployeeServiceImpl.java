@@ -48,4 +48,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         LOGGER.trace("delete(id: {})", id);
         employeeDao.delete(id);
     }
+
+    @Override
+    public List<Employee> getByDepartmentId(Integer id) {
+        LOGGER.trace("getByDepartmentId({})", id);
+        return employeeDao.getByDepartmentId(id);
+    }
 }

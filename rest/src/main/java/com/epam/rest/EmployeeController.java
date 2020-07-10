@@ -36,6 +36,7 @@ public class EmployeeController {
 
     @PostMapping("/employee")
     public ResponseEntity<Employee> add(@RequestBody Employee employee){
+        LOGGER.trace("add({})", employee);
         try {
             Employee createdEmployee = employeeService.add(employee);
             return ResponseEntity.created(URI.create("employee/" + createdEmployee.getId()))
@@ -47,8 +48,9 @@ public class EmployeeController {
         return ResponseEntity.badRequest().body(null);
     }
 
-    @PostMapping("/employee/{id}")
+    @PutMapping("/employee/{id}")
     public ResponseEntity<Employee> update(@RequestBody Employee newEmployee,@PathVariable Integer id){
+        LOGGER.trace("update({}, {})", newEmployee, id);
         if(newEmployee == null){
             return ResponseEntity.badRequest().body(null);
         }
@@ -63,7 +65,17 @@ public class EmployeeController {
 
     @DeleteMapping("/employee/{id}")
     public ResponseEntity<Employee> delete(@PathVariable Integer id){
+        LOGGER.trace("delete({})", id);
         employeeService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/employee_dep")
+    public ResponseEntity<List<Employee>> getByDepartmentId(@RequestParam Integer id){
+        LOGGER.trace("getByDepartmentId({})", id);
+        if(id==null){
+            return ResponseEntity.badRequest().body(null);
+        }
+        return ResponseEntity.ok(employeeService.getByDepartmentId(id));
     }
 }

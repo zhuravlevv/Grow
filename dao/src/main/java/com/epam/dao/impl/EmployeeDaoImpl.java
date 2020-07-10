@@ -38,6 +38,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Value("${employee.delete}")
     private String delete;
 
+    @Value("{employee.selectByDepartmentId}")
+    private String selectByDepartmentId;
+
     public EmployeeDaoImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate){
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
@@ -88,6 +91,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("id", id);
         namedParameterJdbcTemplate.update(delete, map);
+    }
+
+    @Override
+    public List<Employee> getByDepartmentId(Integer id) {
+        LOGGER.trace("Get all by department id");
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("department_id", id);
+        return namedParameterJdbcTemplate.query("SELECT * FROM employee WHERE department_id = :department_id",
+                map, new EmployeeMapper());
     }
 
     private static class EmployeeMapper implements RowMapper<Employee>{

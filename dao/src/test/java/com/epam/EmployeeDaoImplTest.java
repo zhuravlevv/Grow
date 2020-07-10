@@ -11,6 +11,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath*:test-dao.xml", "classpath*:test-db.xml", "classpath:dao.xml"})
 public class EmployeeDaoImplTest {
@@ -67,5 +70,13 @@ public class EmployeeDaoImplTest {
         employeeDao.delete(addedEmployee.getId());
 
         Assert.assertFalse(employeeDao.getById(addedEmployee.getId()).isPresent());
+    }
+
+    @Test
+    public void getByDepartmentId() {
+
+        List<Employee> employees = employeeDao.getByDepartmentId(1);
+        assertNotNull(employees);
+        assertTrue(employees.size() > 0);
     }
 }

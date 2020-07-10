@@ -17,4 +17,6 @@ public interface EmployeeDao {
     public Employee update(Employee employee, Integer id) throws Exception;
 
     public void delete(Integer id);
+
+    public List<Employee> getByDepartmentId(Integer id);
 }

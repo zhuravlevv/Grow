@@ -16,4 +16,6 @@ public interface EmployeeService {
     public Employee update(Employee newEmployee, Integer id) throws Exception;
 
     public void delete(Integer id);
+
+    public List<Employee> getByDepartmentId(Integer id);
 }
