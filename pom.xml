@@ -196,6 +196,12 @@
                 <version>1.4.180</version>
             </dependency>
 
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.25</version>
+            </dependency>
+
             <!-- logger -->
             <dependency>
                 <groupId>ch.qos.logback</groupId>

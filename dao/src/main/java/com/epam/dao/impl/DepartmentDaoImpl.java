@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
+import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -76,7 +77,10 @@ public class DepartmentDaoImpl implements DepartmentDao {
         map.addValue("name", department.getName());
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(insert ,map, keyHolder);
-        return getById((Integer) keyHolder.getKey()).orElseThrow(Exception::new);
+        Number number = keyHolder.getKey();
+        assert number != null;
+        Integer key = number.intValue();
+        return getById(key).orElseThrow(Exception::new);
     }
 
     private static class DepartmentMapper implements RowMapper<Department> {
