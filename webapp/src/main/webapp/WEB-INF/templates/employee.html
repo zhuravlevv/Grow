@@ -132,7 +132,6 @@
                             <div class="d-flex justify-content-end">
                                 <a href="employees.html"
                                    th:href="@{/employees}"
-                                   th:onclick="@{document.forms['employeeForm'].submit(); return false;}"
                                    class="btn btn-light mr-1"
                                    title="Cancel"
                                    data-toggle="tooltip"
@@ -140,6 +139,7 @@
                                     Cancel</a>
                                 <a href="employees.html"
                                    th:href="@{/employees}"
+                                   th:onclick="@{document.forms['employeeForm'].submit(); return false;}"
                                    class="btn btn-primary"
                                    title="Save employee"
                                    data-toggle="tooltip"
