@@ -41,6 +41,44 @@
     </bean>
 
 
+<!--    <bean id="departmentController" class="com.epam.web_app.DepartmentController">-->
+<!--        <constructor-arg index="0" ref="departmentDtoServiceRest"/>-->
+<!--        <constructor-arg index="1" ref="departmentServiceRest"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="employeeController" class="com.epam.web_app.EmployeeController">-->
+<!--        <constructor-arg index="0" ref="departmentServiceRest"/>-->
+<!--        <constructor-arg index="1" ref="employeeServiceRest"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="departmentServiceRest" class="com.epam.service_rest.DepartmentServiceRest">-->
+<!--        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.departments}"/>-->
+<!--        <constructor-arg index="1" ref="restTemplate"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="departmentDtoServiceRest" class="com.epam.service_rest.DepartmentDtoServiceRest">-->
+<!--        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.department_dtos}"/>-->
+<!--        <constructor-arg index="1" ref="restTemplate"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="employeeServiceRest" class="com.epam.service_rest.EmployeeServiceRest">-->
+<!--        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.employees}"/>-->
+<!--        <constructor-arg index="1" ref="restTemplate"/>-->
+<!--    </bean>-->
+
+    <bean id="em" class="com.epam.">
+        
+    </bean>
+    
+    
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+
 
     <bean id="departmentDao" class="com.epam.dao.impl.DepartmentDaoImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>

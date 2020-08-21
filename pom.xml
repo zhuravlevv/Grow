@@ -15,6 +15,7 @@
         <module>rest</module>
         <module>webapp</module>
         <module>service</module>
+        <module>service_rest</module>
     </modules>
 
     <properties>
@@ -40,6 +41,12 @@
 
             <dependency>
                 <groupId>com.epam</groupId>
+                <artifactId>service_rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.epam</groupId>
                 <artifactId>webapp</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -48,7 +55,6 @@
                 <groupId>com.epam</groupId>
                 <artifactId>test</artifactId>
                 <version>${project.version}</version>
-                <scope>test</scope>
             </dependency>
 
             <dependency>
