@@ -53,6 +53,10 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(String id){
+        this.id = Integer.parseInt(id);
+    }
+
     public Employee(String firstName, String lastName, Double salary, Integer departmentId) {
         this.firstName = firstName;
         this.lastName = lastName;

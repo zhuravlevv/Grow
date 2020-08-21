@@ -1,12 +1,14 @@
 package com.epam.model.dto;
 
+import java.math.BigDecimal;
+
 public class DepartmentDto {
 
     private Integer id;
 
     private String name;
 
-    private Double averageSalary;
+    private BigDecimal averageSalary;
 
     public Integer getId() {
         return id;
@@ -24,18 +26,18 @@ public class DepartmentDto {
         this.name = name;
     }
 
-    public Double getAverageSalary() {
+    public BigDecimal getAverageSalary() {
         return averageSalary;
     }
 
-    public void setAverageSalary(Double averageSalary) {
+    public void setAverageSalary(BigDecimal averageSalary) {
         this.averageSalary = averageSalary;
     }
 
     public DepartmentDto() {
     }
 
-    public DepartmentDto(String name, Double averageSalary) {
+    public DepartmentDto(String name, BigDecimal averageSalary) {
         this.name = name;
         this.averageSalary = averageSalary;
     }

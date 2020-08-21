@@ -6,6 +6,7 @@ import com.epam.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,8 +22,10 @@ public class EmployeeController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeController.class);
 
+    @Qualifier("departmentServiceRest")
     private final DepartmentService departmentService;
 
+    @Qualifier("employeeServiceRest")
     private final EmployeeService employeeService;
 
     @Autowired
@@ -49,7 +52,6 @@ public class EmployeeController {
             model.addAttribute("departments", departmentService.getAll());
             return "employee";
         } else {
-            // TOO employee not found - pass error message as parameter or handle not found error
             return "redirect:employees";
         }
     }
@@ -59,7 +61,6 @@ public class EmployeeController {
                                  BindingResult result) {
 
         LOGGER.debug("updateEmployee({}, {})", employee, result);
-        // TODO implement validation
         if (result.hasErrors()) {
             return "employee";
         } else {
@@ -91,7 +92,6 @@ public class EmployeeController {
                               BindingResult result) {
 
         LOGGER.debug("addEmployee({}, {})", employee, result);
-        // TODO implement validation
         if (result.hasErrors()) {
             return "employee";
         } else {

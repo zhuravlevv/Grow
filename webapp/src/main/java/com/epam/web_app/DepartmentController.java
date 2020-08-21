@@ -7,7 +7,7 @@ import com.epam.web_app.validator.DepartmentValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.lang.model.util.ElementScanner6;
 import java.util.Optional;
 
 @Controller
@@ -23,8 +22,10 @@ public class DepartmentController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentController.class);
 
+    @Qualifier("departmentDtoServiceRest")
     private final DepartmentDtoService departmentDtoService;
 
+    @Qualifier("departmentServiceRest")
     private final DepartmentService departmentService;
 
     @Autowired
@@ -98,7 +99,7 @@ public class DepartmentController {
         if(result.hasErrors()){
             return "department";
         }
-        else{
+        else {
             try {
                 departmentService.update(department, id);
             } catch (Exception e) {

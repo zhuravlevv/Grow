@@ -53,10 +53,10 @@ public class DepartmentDtoControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].id", Matchers.is(0)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].name", Matchers.is("d0")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].averageSalary", Matchers.is(100.00)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].averageSalary", Matchers.is(100)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].id", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].name", Matchers.is("d1")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].averageSalary", Matchers.is(101.00)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].averageSalary", Matchers.is(101)))
         ;
 
         Mockito.verify(departmentDtoService).getAllWithAvgSalary();
@@ -66,7 +66,7 @@ public class DepartmentDtoControllerTest {
         DepartmentDto departmentDto = new DepartmentDto();
         departmentDto.setId(index);
         departmentDto.setName("d" + index);
-        departmentDto.setAverageSalary((double) (100 + index));
+        departmentDto.setAverageSalary(BigDecimal.valueOf(100 + index));
         return departmentDto;
     }
 }
