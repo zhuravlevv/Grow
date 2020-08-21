@@ -109,9 +109,8 @@ public class DepartmentControllerIT {
                 MockMvcRequestBuilders.post("/department")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("departmentName", "test")
-        ).andExpect(status().isFound())
-                .andExpect(view().name("redirect:/departments"))
-                .andExpect(redirectedUrl("/departments"));
+        ).andExpect(status().isOk())
+                .andExpect(view().name("department"));
     }
 
     @Test

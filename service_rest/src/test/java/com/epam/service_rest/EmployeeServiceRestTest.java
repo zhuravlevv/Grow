@@ -151,7 +151,7 @@ public class EmployeeServiceRestTest {
         employee.setId(id);
         employee.setFirstName("firstNameEmployeeShouldUpdateEmployee");
 
-        mockServer.expect(ExpectedCount.once(), requestTo(new URI(URL)))
+        mockServer.expect(ExpectedCount.once(), requestTo(new URI(URL + "/" + id)))
                 .andExpect(method(HttpMethod.PUT))
                 .andRespond(withStatus(HttpStatus.OK)
                         .contentType(MediaType.APPLICATION_JSON)

@@ -33,7 +33,7 @@ public class DepartmentServiceRestTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentServiceRestTest.class);
 
-    public static final String DEPARTMENTS_URL = "http://localhost:8088/department";
+    public static final String DEPARTMENTS_URL = "http://localhost:8080/department";
 
     @Autowired
     RestTemplate restTemplate;
@@ -128,7 +128,7 @@ public class DepartmentServiceRestTest {
         department.setId(id);
         department.setName("departmentNameShouldUpdateDepartment");
 
-        mockServer.expect(ExpectedCount.once(), requestTo(new URI(DEPARTMENTS_URL)))
+        mockServer.expect(ExpectedCount.once(), requestTo(new URI(DEPARTMENTS_URL + "/" + id)))
                 .andExpect(method(HttpMethod.PUT))
                 .andRespond(withStatus(HttpStatus.OK)
                         .contentType(MediaType.APPLICATION_JSON)

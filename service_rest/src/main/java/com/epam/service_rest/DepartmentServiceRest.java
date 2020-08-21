@@ -58,7 +58,7 @@ public class DepartmentServiceRest implements DepartmentService {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<Department> entity = new HttpEntity<>(newDepartment, headers);
-        ResponseEntity<Department> result = restTemplate.exchange(url, HttpMethod.PUT, entity, Department.class);
+        ResponseEntity<Department> result = restTemplate.exchange(url + "/" + id, HttpMethod.PUT, entity, Department.class);
         return result.getBody();
     }
 

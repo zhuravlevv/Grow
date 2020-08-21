@@ -67,7 +67,7 @@ public class EmployeeServiceRest implements EmployeeService {
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<Employee> entity = new HttpEntity<>(newEmployee, headers);
         System.out.println(entity);
-        ResponseEntity<Employee> result = restTemplate.exchange(url, HttpMethod.PUT, entity, Employee.class);
+        ResponseEntity<Employee> result = restTemplate.exchange(url + "/" + id, HttpMethod.PUT, entity, Employee.class);
         return result.getBody();
     }
 
