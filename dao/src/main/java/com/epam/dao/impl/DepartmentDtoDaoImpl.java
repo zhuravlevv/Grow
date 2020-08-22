@@ -14,7 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Component
 public class DepartmentDtoDaoImpl implements DepartmentDtoDao {
 
     private Logger LOGGER = LoggerFactory.getLogger(DepartmentDtoDao.class);
