@@ -20,7 +20,7 @@
     <!-- Component scan for @Controller, @Service... annotations -->
     <context:component-scan base-package="com.epam.*"/>
 
-    <import resource="classpath*:test-db.xml"/>
+    <import resource="classpath*:real-db.xml"/>
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -30,12 +30,19 @@
         </property>
     </bean>
 
+    <bean id="departmentDtoDao" class="com.epam.dao.impl.DepartmentDtoDaoImpl">
+        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    </bean>
+
     <bean id="departmentDao" class="com.epam.dao.impl.DepartmentDaoImpl">
+        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    </bean>
+
+    <bean id="employeeDao" class="com.epam.dao.impl.EmployeeDaoImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 
     <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
-
 </beans>

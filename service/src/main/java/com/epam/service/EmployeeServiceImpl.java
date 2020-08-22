@@ -1,8 +1,8 @@
-package com.epam.service.impl;
+package com.epam.service;
 
 import com.epam.dao.EmployeeDao;
 import com.epam.model.Employee;
-import com.epam.service.EmployeeService;
+import com.epam.service_api.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

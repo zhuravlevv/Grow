@@ -16,6 +16,7 @@
         <module>webapp</module>
         <module>service</module>
         <module>service_rest</module>
+        <module>service_api</module>
     </modules>
 
     <properties>
@@ -32,6 +33,12 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>com.epam</groupId>
+                <artifactId>service_api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.epam</groupId>

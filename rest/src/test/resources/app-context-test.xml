@@ -47,15 +47,15 @@
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 
-    <bean id="departmentService" class="com.epam.service.impl.DepartmentServiceImpl">
+    <bean id="departmentService" class="com.epam.service.DepartmentServiceImpl">
         <constructor-arg ref="departmentDao"/>
     </bean>
 
-    <bean id="departmentDtoService" class="com.epam.service.impl.DepartmentDtoServiceImpl">
+    <bean id="departmentDtoService" class="com.epam.service.DepartmentDtoServiceImpl">
         <constructor-arg ref="departmentDtoDao"/>
     </bean>
 
-    <bean id="employeeService" class="com.epam.service.impl.EmployeeServiceImpl">
+    <bean id="employeeService" class="com.epam.service.EmployeeServiceImpl">
         <constructor-arg ref="employeeDao"/>
     </bean>
 

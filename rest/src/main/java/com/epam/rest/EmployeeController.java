@@ -2,7 +2,7 @@ package com.epam.rest;
 
 import com.epam.model.Employee;
 import com.epam.rest.exception.EmployeeNotFoundException;
-import com.epam.service.EmployeeService;
+import com.epam.service_api.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;

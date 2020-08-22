@@ -1,8 +1,8 @@
 package com.epam.web_app;
 
 import com.epam.model.Department;
-import com.epam.service.DepartmentDtoService;
-import com.epam.service.DepartmentService;
+import com.epam.service_api.DepartmentDtoService;
+import com.epam.service_api.DepartmentService;
 import com.epam.web_app.validator.DepartmentValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

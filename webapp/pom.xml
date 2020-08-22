@@ -28,11 +28,18 @@
         <dependency>
             <groupId>com.epam</groupId>
             <artifactId>dao</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>com.epam</groupId>
             <artifactId>service</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam</groupId>
+            <artifactId>service_api</artifactId>
         </dependency>
 
         <dependency>

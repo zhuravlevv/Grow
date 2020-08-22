@@ -1,11 +1,10 @@
 package com.epam.service_rest;
 
 import com.epam.model.Department;
-import com.epam.service.DepartmentService;
+import com.epam.service_api.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;

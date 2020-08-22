@@ -1,11 +1,10 @@
 package com.epam.service_rest;
 
 import com.epam.model.dto.DepartmentDto;
-import com.epam.service.DepartmentDtoService;
+import com.epam.service_api.DepartmentDtoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;

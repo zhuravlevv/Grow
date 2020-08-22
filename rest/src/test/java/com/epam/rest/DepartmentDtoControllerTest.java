@@ -1,7 +1,7 @@
 package com.epam.rest;
 
 import com.epam.model.dto.DepartmentDto;
-import com.epam.service.DepartmentDtoService;
+import com.epam.service_api.DepartmentDtoService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

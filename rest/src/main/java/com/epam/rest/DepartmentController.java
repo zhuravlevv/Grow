@@ -2,7 +2,7 @@ package com.epam.rest;
 
 import com.epam.model.Department;
 import com.epam.rest.exception.DepartmentNotFoundException;
-import com.epam.service.DepartmentService;
+import com.epam.service_api.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;

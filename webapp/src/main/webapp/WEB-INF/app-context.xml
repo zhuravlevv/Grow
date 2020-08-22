@@ -22,15 +22,10 @@
     <!-- Component scan for @Controller, @Service... annotations -->
     <context:component-scan base-package="com.epam.*"/>
 
-    <jdbc:initialize-database>
-        <jdbc:script location="classpath:create-real-db.sql"/>
-    </jdbc:initialize-database>
-
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
                 <value>classpath:application.properties</value>
-                <value>classpath:dao.properties</value>
             </list>
         </property>
     </bean>
@@ -38,18 +33,6 @@
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
           p:basename="/WEB-INF/messages">
-    </bean>
-
-    <bean id="departmentDao" class="com.epam.dao.impl.DepartmentDaoImpl">
-        <constructor-arg ref="namedParameterJdbcTemplate"/>
-    </bean>
-
-    <bean id="departmentDtoDao" class="com.epam.dao.impl.DepartmentDtoDaoImpl">
-        <constructor-arg ref="namedParameterJdbcTemplate"/>
-    </bean>
-
-    <bean id="employeeDao" class="com.epam.dao.impl.EmployeeDaoImpl">
-        <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 
     <!-- ............................................................................... -->
@@ -88,17 +71,6 @@
     </bean>
 
     <!-- ............................................................................... -->
-
-    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
-        <constructor-arg ref="dataSource"/>
-    </bean>
-
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="password" value="75Root75"/>
-        <property name="username" value="root"/>
-        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/growcourse"/>
-    </bean>
 
     <!-- Thymeleaf Template Resolver -->
     <bean id="templateResolver"

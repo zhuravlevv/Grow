@@ -4,19 +4,19 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="departmentService" class="com.epam.service.impl.DepartmentServiceImpl">
+    <bean id="departmentService" class="com.epam.service.DepartmentServiceImpl">
         <constructor-arg ref="departmentDao"/>
     </bean>
 
-    <bean id="departmentDtoService" class="com.epam.service.impl.DepartmentDtoServiceImpl">
+    <bean id="departmentDtoService" class="com.epam.service.DepartmentDtoServiceImpl">
         <constructor-arg ref="departmentDtoDao"/>
     </bean>
 
-    <bean id="departmentDao" class="com.epam.service.impl.DepartmentDaoImpl">
+    <bean id="departmentDao" class="com.epam.dao.impl.DepartmentDaoImpl">
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
 
-    <bean id="departmentDtoDao" class="com.epam.service.impl.DepartmentDtoDaoImpl">
+    <bean id="departmentDtoDao" class="com.epam.dao.impl.DepartmentDtoDaoImpl">
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
 

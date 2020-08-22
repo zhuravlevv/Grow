@@ -43,7 +43,7 @@ public class DepartmentDtoServiceRestTest {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    DepartmentDtoServiceRest departmentDtoService;
+    private DepartmentDtoServiceRest departmentDtoService;
 
     @BeforeEach
     public void before() {
