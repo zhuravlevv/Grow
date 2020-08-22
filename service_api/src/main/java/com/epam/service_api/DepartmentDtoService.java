@@ -1,4 +1,4 @@
-package com.epam.service;
+package com.epam.service_api;
 
 
 import com.epam.model.dto.DepartmentDto;
