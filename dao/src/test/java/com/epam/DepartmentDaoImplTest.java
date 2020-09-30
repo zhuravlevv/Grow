@@ -1,18 +1,24 @@
 package com.epam;
 
+import com.epam.config.TestConfigDao;
 import com.epam.dao.DepartmentDao;
 import com.epam.model.Department;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml", "classpath:dao.xml"})
+@ContextConfiguration(classes={TestConfigDao.class})
+@TestPropertySource(locations = "classpath:dao.properties")
+@Sql({"classpath:schema-h2.sql", "classpath:data-h2.sql"})
 public class DepartmentDaoImplTest {
 
     @Autowired
@@ -21,7 +27,7 @@ public class DepartmentDaoImplTest {
     @Test
     public void getAll(){
         List<Department> departments = departmentDao.getAll();
-        Assert.assertNotNull(departments);
+        assertNotNull(departments);
     }
 
     @Test
@@ -30,7 +36,7 @@ public class DepartmentDaoImplTest {
         department.setName("department1");
         Department resDepartment = departmentDao.add(department);
         Department searchDepartment = departmentDao.getById(resDepartment.getId()).orElseThrow(Exception::new);
-        Assert.assertEquals(searchDepartment, resDepartment);
+        assertEquals(searchDepartment, resDepartment);
     }
 
     @Test
@@ -42,8 +48,8 @@ public class DepartmentDaoImplTest {
 
         Department returnedDepartment = departmentDao.getById(addedDepartment.getId()).orElseThrow(Exception::new);
 
-        Assert.assertEquals(returnedDepartment.getName(), "department");
-        Assert.assertEquals(returnedDepartment.getId(), addedDepartment.getId());
+        assertEquals(returnedDepartment.getName(), "department");
+        assertEquals(returnedDepartment.getId(), addedDepartment.getId());
     }
 
     @Test
@@ -57,7 +63,7 @@ public class DepartmentDaoImplTest {
         Department addedDepartment = departmentDao.add(department1);
         Department department = departmentDao.update(department2, addedDepartment.getId());
 
-        Assert.assertEquals(department.getName(), "department2");
+        assertEquals(department.getName(), "department2");
     }
 
     @Test
@@ -69,7 +75,7 @@ public class DepartmentDaoImplTest {
 
         departmentDao.delete(addedDepartment.getId());
 
-        Assert.assertFalse(departmentDao.getById(addedDepartment.getId()).isPresent());
+        assertFalse(departmentDao.getById(addedDepartment.getId()).isPresent());
     }
 
 }

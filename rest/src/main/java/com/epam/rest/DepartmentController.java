@@ -5,6 +5,8 @@ import com.epam.rest.exception.DepartmentNotFoundException;
 import com.epam.service_api.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,14 +16,15 @@ import java.util.List;
 @RestController
 public class DepartmentController {
 
+    @Qualifier("DepartmentServiceImpl")
     private final DepartmentService departmentService;
 
     private final Logger LOGGER = LoggerFactory.getLogger(DepartmentController.class);
 
+    @Autowired
     public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
-
 
     @GetMapping("/department")
     public ResponseEntity<List<Department>> getAll(){

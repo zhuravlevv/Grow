@@ -1,21 +1,24 @@
 package com.epam;
 
+import com.epam.config.TestConfigDao;
 import com.epam.dao.EmployeeDao;
 import com.epam.model.Employee;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = {"classpath*:test-dao.xml", "classpath*:test-db.xml", "classpath:dao.xml"})
+@ContextConfiguration(classes={TestConfigDao.class})
+@TestPropertySource(locations = "classpath:dao.properties")
+@Sql({"classpath:schema-h2.sql", "classpath:data-h2.sql"})
 public class EmployeeDaoImplTest {
 
     @Autowired
@@ -24,7 +27,7 @@ public class EmployeeDaoImplTest {
     @Test
     public void getAll(){
         List<Employee> employees = employeeDao.getAll();
-        Assert.assertNotNull(employees);
+        assertNotNull(employees);
     }
 
     @Test
@@ -34,7 +37,7 @@ public class EmployeeDaoImplTest {
 
         Employee searchedEmployee = employeeDao.getById(addedEmployee.getId()).orElseThrow(Exception::new);
 
-        Assert.assertEquals(addedEmployee, searchedEmployee);
+        assertEquals(addedEmployee, searchedEmployee);
     }
 
     @Test
@@ -44,7 +47,7 @@ public class EmployeeDaoImplTest {
 
         Employee searchedEmployee = employeeDao.getById(addedEmployee.getId()).orElseThrow(Exception::new);
 
-        Assert.assertEquals(addedEmployee, searchedEmployee);
+        assertEquals(addedEmployee, searchedEmployee);
     }
 
     @Test
@@ -58,7 +61,7 @@ public class EmployeeDaoImplTest {
 
         Employee searchedEmployee = employeeDao.getById(addedEmployee.getId()).orElseThrow(Exception::new);
 
-        Assert.assertEquals(employee1.getFirstName(), searchedEmployee.getFirstName());
+        assertEquals(employee1.getFirstName(), searchedEmployee.getFirstName());
 
     }
 
@@ -69,7 +72,7 @@ public class EmployeeDaoImplTest {
 
         employeeDao.delete(addedEmployee.getId());
 
-        Assert.assertFalse(employeeDao.getById(addedEmployee.getId()).isPresent());
+        assertFalse(employeeDao.getById(addedEmployee.getId()).isPresent());
     }
 
     @Test

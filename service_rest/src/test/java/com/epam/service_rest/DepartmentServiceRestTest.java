@@ -1,6 +1,7 @@
 package com.epam.service_rest;
 
 import com.epam.model.Department;
+import com.epam.service_rest.config.TestConfigRestService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = {"classpath:app-context-test.xml"})
+@ContextConfiguration(classes = {TestConfigRestService.class})
 public class DepartmentServiceRestTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentServiceRestTest.class);

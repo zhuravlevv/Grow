@@ -4,6 +4,8 @@ CREATE TABLE department(
     name VARCHAR(255) NOT NULL UNIQUE
 );
 
+INSERT into department VALUES (2, 'NAME');
+
 DROP TABLE IF EXISTS employee;
 CREATE TABLE employee(
     id INT PRIMARY KEY AUTO_INCREMENT,

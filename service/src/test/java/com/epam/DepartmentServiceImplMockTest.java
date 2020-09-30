@@ -1,21 +1,25 @@
 package com.epam;
 
+import com.epam.config.TestConfigService;
 import com.epam.dao.impl.DepartmentDaoImpl;
 import com.epam.model.Department;
 import com.epam.service.DepartmentServiceImpl;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
+@ContextConfiguration(classes = {TestConfigService.class})
 public class DepartmentServiceImplMockTest {
 
     @InjectMocks
@@ -30,7 +34,7 @@ public class DepartmentServiceImplMockTest {
         Mockito.when(departmentDao.getAll()).thenReturn(new ArrayList<>());
         List<Department> departments = departmentService.getAll();
 
-        Assert.assertNotNull(departments);
+        assertNotNull(departments);
     }
 
     @Test
@@ -42,7 +46,7 @@ public class DepartmentServiceImplMockTest {
         Optional<Department> returnedDepartment = departmentService.getById(1);
 
         try {
-            Assert.assertEquals(department, returnedDepartment.orElseThrow(Exception::new));
+            assertEquals(department, returnedDepartment.orElseThrow(Exception::new));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -56,7 +60,7 @@ public class DepartmentServiceImplMockTest {
         try {
             Mockito.when(departmentDao.add(Mockito.any(Department.class))).thenReturn(department);
             Department returnedDepartment = departmentService.add(department);
-            Assert.assertEquals(department, returnedDepartment);
+            assertEquals(department, returnedDepartment);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -71,7 +75,7 @@ public class DepartmentServiceImplMockTest {
         try {
             Mockito.when(departmentDao.update(Mockito.any(Department.class), Mockito.anyInt())).thenReturn(newDepartment);
             Department returnedDepartment = departmentService.update(newDepartment, 1);
-            Assert.assertEquals(newDepartment, returnedDepartment);
+            assertEquals(newDepartment, returnedDepartment);
         } catch (Exception e) {
             e.printStackTrace();
         }

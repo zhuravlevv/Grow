@@ -15,8 +15,8 @@
     </bean>
 
     <jdbc:initialize-database>
-        <jdbc:script location="classpath*:create-db.sql"/>
-        <jdbc:script location="classpath*:data-script.sql"/>
+        <jdbc:script location="classpath*:schema-mysql.sql"/>
+        <jdbc:script location="classpath*:data-h2.sql"/>
     </jdbc:initialize-database>
 
 </beans>
