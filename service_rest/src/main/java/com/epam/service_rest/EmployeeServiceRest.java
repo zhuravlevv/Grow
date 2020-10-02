@@ -4,13 +4,16 @@ import com.epam.model.Employee;
 import com.epam.service_api.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.*;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class EmployeeServiceRest implements EmployeeService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeServiceRest.class);
@@ -19,7 +22,8 @@ public class EmployeeServiceRest implements EmployeeService {
 
     private RestTemplate restTemplate;
 
-    public EmployeeServiceRest(String url, RestTemplate restTemplate) {
+    public EmployeeServiceRest(@Qualifier("employeesUrl") String url,
+                               RestTemplate restTemplate) {
         this.url = url;
         this.restTemplate = restTemplate;
     }

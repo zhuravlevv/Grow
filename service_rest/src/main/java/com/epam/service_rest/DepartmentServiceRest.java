@@ -4,13 +4,16 @@ import com.epam.model.Department;
 import com.epam.service_api.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.*;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class DepartmentServiceRest implements DepartmentService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentServiceRest.class);
@@ -19,7 +22,8 @@ public class DepartmentServiceRest implements DepartmentService {
 
     private RestTemplate restTemplate;
 
-    public DepartmentServiceRest(String url, RestTemplate restTemplate) {
+    public DepartmentServiceRest(@Qualifier("departmentsUrl") String url,
+                                 RestTemplate restTemplate) {
         this.url = url;
         this.restTemplate = restTemplate;
     }

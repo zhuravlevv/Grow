@@ -1,15 +1,13 @@
 package com.epam.service_rest.config;
 
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
 
-@Configuration
-@ComponentScan(basePackages = {"com.epam.*"})
+@TestConfiguration
 public class TestConfigRestService {
 
     @Bean
@@ -17,5 +15,20 @@ public class TestConfigRestService {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setMessageConverters(Collections.singletonList(new MappingJackson2HttpMessageConverter()));
         return restTemplate;
+    }
+
+    @Bean
+    public String departmentsUrl(){
+        return "http://localhost:8080/department";
+    }
+
+    @Bean
+    public String departmentDtosUrl(){
+        return "http://localhost:8080/department_avg";
+    }
+
+    @Bean
+    public String employeesUrl(){
+        return "http://localhost:8080/employee";
     }
 }
