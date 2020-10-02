@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -22,14 +21,13 @@ public class EmployeeController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeController.class);
 
-    @Qualifier("departmentServiceRest")
     private final DepartmentService departmentService;
 
-    @Qualifier("employeeServiceRest")
     private final EmployeeService employeeService;
 
     @Autowired
-    public EmployeeController(DepartmentService departmentService, EmployeeService employeeService) {
+    public EmployeeController(@Qualifier("departmentServiceRest") DepartmentService departmentService,
+                              @Qualifier("employeeServiceRest") EmployeeService employeeService) {
         this.departmentService = departmentService;
         this.employeeService = employeeService;
     }
@@ -57,7 +55,7 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/employee/{id}")
-    public String updateEmployee(@PathVariable Integer id, @Valid Employee employee,
+    public String updateEmployee(@PathVariable Integer id, Employee employee,
                                  BindingResult result) {
 
         LOGGER.debug("updateEmployee({}, {})", employee, result);
@@ -88,7 +86,7 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/employee")
-    public String addEmployee(@Valid Employee employee,
+    public String addEmployee(Employee employee,
                               BindingResult result) {
 
         LOGGER.debug("addEmployee({}, {})", employee, result);
