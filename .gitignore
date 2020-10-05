@@ -29,7 +29,6 @@ target
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
@@ -60,7 +59,6 @@ lib/
 manifest.yml
 out
 overridedb.*
-target
 transaction-logs
 .flattened-pom.xml
 secrets.yml
