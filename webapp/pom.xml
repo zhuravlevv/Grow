@@ -13,6 +13,7 @@
 
     <packaging>war</packaging>
 
+
     <dependencies>
 
         <dependency>
@@ -131,6 +132,8 @@
     </dependencies>
 
     <build>
+        <finalName>webapp</finalName>
+
         <plugins>
             <!-- Embedded Jetty HTTP Server for testing war application -->
             <plugin>
@@ -139,10 +142,10 @@
                 <configuration>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <webApp>
-                        <contextPath>/</contextPath>
+                        <contextPath>/webapp</contextPath>
                     </webApp>
                     <httpConnector>
-                        <port>8080</port>
+                        <port>8081</port>
                     </httpConnector>
                 </configuration>
             </plugin>
