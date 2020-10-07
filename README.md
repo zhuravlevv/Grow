@@ -1,21 +1,21 @@
-#Grow Project
+# Grow Project
 
-##Requirements
+## Requirements
 
 For building and running the application you need:
 - JDK 1.8
 - Maven 3
 
-##Build
+## Build
 
 To build project go to Project folder and execute
 ```
 mvn clean install  
 ```
 
-##Running the application using Maven Jetty plugin
+## Running the application using Maven Jetty plugin
 
-####To start web using Maven Jetty plugin
+#### To start web using Maven Jetty plugin
 
 ```
 cd webapp
@@ -28,7 +28,7 @@ Application will be available at:
 http://localhost:8081
 ```
 
-####To start REST using Maven Jetty plugin
+#### To start REST using Maven Jetty plugin
 ```
 cd rest
 mvn jetty:run
@@ -36,12 +36,12 @@ mvn jetty:run
 
 Available REST endpoints:
 
-#####Department_dto
+##### Department_dto
 find all departments with average salary
 ```
 curl --request GET 'http://localhost:8080/department_avg'
 ```
-#####Department
+##### Department
 find all departments
 ```
 curl --request GET 'http://localhost:8080/department'
@@ -68,7 +68,7 @@ remove department by id
 ```
 curl --request DELETE 'http://localhost:8080/department/1'
 ```
-#####Employee
+##### Employee
 find all employees
 ```
 curl --request GET 'http://localhost:8080/employee'
@@ -102,7 +102,7 @@ remove employee by id
 curl --request DELETE 'http://localhost:8080/employee/1'
 ```
 
-##Deploying the application on Tomcat
+## Deploying the application on Tomcat
 After
 ```
 mvn clean install    
