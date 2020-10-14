@@ -1,4 +1,4 @@
-# Grow Spring Boot project
+# Departments Management Spring Boot project
 
 ## Requirements
 
