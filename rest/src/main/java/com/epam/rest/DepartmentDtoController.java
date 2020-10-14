@@ -14,12 +14,11 @@ import java.util.List;
 @RestController
 public class DepartmentDtoController {
 
-    @Qualifier("DepartmentDtoServiceImpl")
+    @Qualifier("departmentDtoServiceImpl")
     private final DepartmentDtoService departmentDtoService;
 
     private final Logger LOGGER = LoggerFactory.getLogger(DepartmentDtoController.class);
 
-    @Autowired
     public DepartmentDtoController(DepartmentDtoService departmentDtoService) {
         this.departmentDtoService = departmentDtoService;
     }

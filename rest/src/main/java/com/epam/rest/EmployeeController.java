@@ -16,12 +16,11 @@ import java.util.List;
 @RestController
 public class EmployeeController {
 
-    @Qualifier("EmployeeServiceImpl")
+    @Qualifier("employeeServiceImpl")
     private final EmployeeService employeeService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeController.class);
 
-    @Autowired
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }

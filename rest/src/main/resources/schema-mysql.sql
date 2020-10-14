@@ -12,5 +12,5 @@ CREATE TABLE employee(
     first_name VARCHAR(255),
     last_name VARCHAR(255),
     department_id INT,
-    salary DOUBLE
+    salary DECIMAL
 )
