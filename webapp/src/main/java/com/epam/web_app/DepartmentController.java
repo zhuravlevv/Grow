@@ -22,16 +22,15 @@ public class DepartmentController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentController.class);
 
-    @Qualifier("departmentDtoServiceRest")
     private final DepartmentDtoService departmentDtoService;
 
-    @Qualifier("departmentServiceRest")
     private final DepartmentService departmentService;
 
     @Autowired
     DepartmentValidator departmentValidator;
 
-    public DepartmentController(DepartmentDtoService departmentDtoService, DepartmentService departmentService) {
+    public DepartmentController(@Qualifier("departmentDtoServiceRest") DepartmentDtoService departmentDtoService,
+                                @Qualifier("departmentServiceRest") DepartmentService departmentService) {
         this.departmentDtoService = departmentDtoService;
         this.departmentService = departmentService;
     }

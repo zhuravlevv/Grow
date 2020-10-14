@@ -1,21 +1,25 @@
 package com.epam;
 
+import com.epam.config.TestConfigService;
 import com.epam.dao.impl.EmployeeDaoImpl;
 import com.epam.model.Employee;
 import com.epam.service.EmployeeServiceImpl;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
+@ContextConfiguration(classes = {TestConfigService.class})
 public class EmployeeServiceImplMockTest {
 
     @InjectMocks
@@ -30,7 +34,7 @@ public class EmployeeServiceImplMockTest {
         Mockito.when(employeeDao.getAll()).thenReturn(new ArrayList<>());
         List<Employee> employees = employeeService.getAll();
 
-        Assert.assertNotNull(employees);
+        assertNotNull(employees);
     }
 
     @Test
@@ -42,7 +46,7 @@ public class EmployeeServiceImplMockTest {
         Optional<Employee> returnedEmployee = employeeService.getById(1);
 
         try {
-            Assert.assertEquals(employee, returnedEmployee.orElseThrow(Exception::new));
+            assertEquals(employee, returnedEmployee.orElseThrow(Exception::new));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -56,7 +60,7 @@ public class EmployeeServiceImplMockTest {
         try {
             Mockito.when(employeeDao.add(Mockito.any(Employee.class))).thenReturn(employee);
             Employee returnedEmployee = employeeService.add(employee);
-            Assert.assertEquals(employee, returnedEmployee);
+            assertEquals(employee, returnedEmployee);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -71,7 +75,7 @@ public class EmployeeServiceImplMockTest {
         try {
             Mockito.when(employeeDao.update(Mockito.any(Employee.class), Mockito.anyInt())).thenReturn(newEmployee);
             Employee returnedEmployee = employeeService.update(newEmployee, 1);
-            Assert.assertEquals(newEmployee, returnedEmployee);
+            assertEquals(newEmployee, returnedEmployee);
         } catch (Exception e) {
             e.printStackTrace();
         }

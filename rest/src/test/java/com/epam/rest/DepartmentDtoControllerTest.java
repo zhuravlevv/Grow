@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 
 @ExtendWith(MockitoExtension.class)
+
 public class DepartmentDtoControllerTest {
     @InjectMocks
     private DepartmentDtoController departmentDtoController;
@@ -50,7 +51,7 @@ public class DepartmentDtoControllerTest {
                 MockMvcRequestBuilders.get("/department_avg")
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].id", Matchers.is(0)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].name", Matchers.is("d0")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].averageSalary", Matchers.is(100)))

@@ -5,11 +5,11 @@ import com.epam.model.dto.DepartmentDto;
 import com.epam.service_api.DepartmentDtoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Service
+@Component
 public class DepartmentDtoServiceImpl implements DepartmentDtoService {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(DepartmentDtoService.class);

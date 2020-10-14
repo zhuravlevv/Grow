@@ -5,19 +5,23 @@ import com.epam.model.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
+@Repository
+@PropertySource("classpath:dao.properties")
 public class EmployeeDaoImpl implements EmployeeDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -39,7 +43,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Value("${employee.delete}")
     private String delete;
 
-    @Value("{employee.selectByDepartmentId}")
+    @Value("${employee.selectByDepartmentId}")
     private String selectByDepartmentId;
 
     public EmployeeDaoImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate){
@@ -70,7 +74,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         map.addValue("salary", employee.getSalary());
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(insert, map, keyHolder);
-        return getById((Integer)keyHolder.getKey()).orElseThrow(Exception::new);
+        return getById(Objects.requireNonNull(keyHolder.getKey()).intValue()).orElseThrow(Exception::new);
     }
 
     @Override
@@ -99,7 +103,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         LOGGER.trace("Get all by department id");
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("department_id", id);
-        return namedParameterJdbcTemplate.query("SELECT * FROM employee WHERE department_id = :department_id",
+        return namedParameterJdbcTemplate.query(selectByDepartmentId,
                 map, new EmployeeMapper());
     }
 

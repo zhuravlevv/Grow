@@ -5,6 +5,8 @@ import com.epam.rest.exception.EmployeeNotFoundException;
 import com.epam.service_api.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,7 @@ import java.util.List;
 @RestController
 public class EmployeeController {
 
+    @Qualifier("employeeServiceImpl")
     private final EmployeeService employeeService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeController.class);
