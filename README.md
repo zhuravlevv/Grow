@@ -22,7 +22,7 @@ mvn spring-boot:run
 or
 ```
 cd webapp
-java -jar target/webapp-1.0-SNAPSHOT.jar target/classes/com/epam/WebApplication
+java -jar target/webapp-1.0-SNAPSHOT.jar
 ```
 ### To start REST
 ####Development Profile (runs h2 database)
@@ -33,7 +33,7 @@ mvn spring-boot:run -Pdev
 or
 ```
 cd rest
-java -jar -Dspring.profiles.active=dev target/rest-1.0-SNAPSHOT.jar target/classes/com/epam/RestApplication
+java -jar -Dspring.profiles.active=dev target/rest-1.0-SNAPSHOT.jar
 ```
 ####Production Profile (runs mysql database)
 ```
@@ -43,7 +43,7 @@ mvn spring-boot:run -Pprod
 or
 ```
 cd rest
-java -jar -Dspring.profiles.active=prod target/rest-1.0-SNAPSHOT.jar target/classes/com/epam/RestApplication
+java -jar -Dspring.profiles.active=prod target/rest-1.0-SNAPSHOT.jar
 ```
 Application will be available at:
 
