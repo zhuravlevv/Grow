@@ -19,16 +19,31 @@ mvn clean install
 cd webapp
 mvn spring-boot:run
 ```
-### To start REST:
+or
+```
+cd webapp
+java -jar target/webapp-1.0-SNAPSHOT.jar target/classes/com/epam/WebApplication
+```
+### To start REST
 ####Development Profile (runs h2 database)
 ```
 cd rest
 mvn spring-boot:run -Pdev
 ```
+or
+```
+cd rest
+java -jar -Dspring.profiles.active=dev target/rest-1.0-SNAPSHOT.jar target/classes/com/epam/RestApplication
+```
 ####Production Profile (runs mysql database)
 ```
 cd rest
 mvn spring-boot:run -Pprod
+```
+or
+```
+cd rest
+java -jar -Dspring.profiles.active=prod target/rest-1.0-SNAPSHOT.jar target/classes/com/epam/RestApplication
 ```
 Application will be available at:
 
