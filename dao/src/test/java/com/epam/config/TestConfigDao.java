@@ -3,9 +3,12 @@ package com.epam.config;
 import com.epam.dao.DepartmentDao;
 import com.epam.dao.DepartmentDtoDao;
 import com.epam.dao.EmployeeDao;
+import com.epam.dao.config.DataAccessAnnotationProcessor;
 import com.epam.dao.impl.DepartmentDaoImpl;
 import com.epam.dao.impl.DepartmentDtoDaoImpl;
 import com.epam.dao.impl.EmployeeDaoImpl;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +18,11 @@ import javax.sql.DataSource;
 
 @Configuration
 public class TestConfigDao {
+
+    @Bean
+    public BeanPostProcessor lazyBeanPostProcessor() {
+        return new DataAccessAnnotationProcessor();
+    }
 
     @Bean
     public DepartmentDao departmentDao(){
