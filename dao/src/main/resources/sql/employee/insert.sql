@@ -1,0 +1,1 @@
+INSERT INTO employee (first_name, last_name, salary, department_id) VALUES (:first_name, :last_name, :salary, :department_id);

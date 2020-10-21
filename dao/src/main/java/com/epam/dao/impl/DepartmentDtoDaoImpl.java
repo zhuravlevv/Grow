@@ -1,11 +1,10 @@
 package com.epam.dao.impl;
 
 import com.epam.dao.DepartmentDtoDao;
+import com.epam.dao.annotations.InjectSql;
 import com.epam.model.dto.DepartmentDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,14 +15,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
-@PropertySource("classpath:dao.properties")
 public class DepartmentDtoDaoImpl implements DepartmentDtoDao {
 
     private Logger LOGGER = LoggerFactory.getLogger(DepartmentDtoDao.class);
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    @Value("${departmentDto.selectAllWithAvgSalary}")
+    @InjectSql("sql/departmentDto/findAll.sql")
     private String selectAllWithAvgSalary;
 
     public DepartmentDtoDaoImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {

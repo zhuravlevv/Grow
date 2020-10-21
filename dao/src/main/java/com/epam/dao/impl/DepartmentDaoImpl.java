@@ -1,12 +1,11 @@
 package com.epam.dao.impl;
 
 import com.epam.dao.DepartmentDao;
+import com.epam.dao.annotations.InjectSql;
 import com.epam.model.Department;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -21,26 +20,25 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@PropertySource("classpath:dao.properties")
 public class DepartmentDaoImpl implements DepartmentDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentDaoImpl.class);
 
-    @Value("${department.selectAll.orderByName}")
+    @InjectSql("sql/department/findAll.sql")
     private String selectAll;
 
-    @Value("${department.insert}")
+    @InjectSql("sql/department/insert.sql")
     private String insert;
 
-    @Value("${department.selectById}")
+    @InjectSql("sql/department/findById.sql")
     private String selectById;
 
-    @Value("${department.update}")
+    @InjectSql("sql/department/update.sql")
     private String update;
 
-    @Value("${department.delete}")
+    @InjectSql("sql/department/delete.sql")
     private String delete;
 
     @Autowired

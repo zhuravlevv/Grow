@@ -1,0 +1,1 @@
+SELECT * FROM department d ORDER BY d.name;

@@ -1,11 +1,10 @@
 package com.epam.dao.impl;
 
 import com.epam.dao.EmployeeDao;
+import com.epam.dao.annotations.InjectSql;
 import com.epam.model.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -21,29 +20,28 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Repository
-@PropertySource("classpath:dao.properties")
 public class EmployeeDaoImpl implements EmployeeDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeDaoImpl.class);
 
-    @Value("${employee.selectAll.orderByLastNameAndFirstName}")
+    @InjectSql("sql/employee/findAll.sql")
     private String selectAll;
 
-    @Value("${employee.selectById}")
+    @InjectSql("sql/employee/findById.sql")
     private String selectById;
 
-    @Value("${employee.insert}")
+    @InjectSql("sql/employee/insert.sql")
     private String insert;
 
-    @Value("${employee.update}")
+    @InjectSql("sql/employee/update.sql")
     private String update;
 
-    @Value("${employee.delete}")
+    @InjectSql("sql/employee/delete.sql")
     private String delete;
 
-    @Value("${employee.selectByDepartmentId}")
+    @InjectSql("sql/employee/findByDepartmentId.sql")
     private String selectByDepartmentId;
 
     public EmployeeDaoImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate){

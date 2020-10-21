@@ -1,0 +1,1 @@
+SELECT * FROM employee WHERE department_id = :department_id;

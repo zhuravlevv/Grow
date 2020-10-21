@@ -1,0 +1,1 @@
+UPDATE department SET name=:name WHERE id=:id;
