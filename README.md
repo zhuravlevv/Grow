@@ -25,7 +25,7 @@ cd webapp
 java -jar target/webapp-1.0-SNAPSHOT.jar
 ```
 ### To start REST
-####Development Profile (runs h2 database)
+#### Development Profile (runs h2 database)
 ```
 cd rest
 mvn spring-boot:run -Pdev
@@ -35,7 +35,7 @@ or
 cd rest
 java -jar -Dspring.profiles.active=dev target/rest-1.0-SNAPSHOT.jar
 ```
-####Production Profile (runs mysql database)
+#### Production Profile (runs mysql database)
 ```
 cd rest
 mvn spring-boot:run -Pprod
@@ -51,7 +51,7 @@ Application will be available at:
 http://localhost:8081
 ```
 
-####Available REST endpoints:	
+#### Available REST endpoints:	
 ##### Department_dto	
 find all departments with average salary	
 ```	
