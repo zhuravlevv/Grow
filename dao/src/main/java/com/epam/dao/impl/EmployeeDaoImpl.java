@@ -5,6 +5,7 @@ import com.epam.dao.annotations.InjectSql;
 import com.epam.model.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -19,7 +20,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-@Repository
+@Profile("jdbc")
+@Repository("employeeDao")
 public class EmployeeDaoImpl implements EmployeeDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
