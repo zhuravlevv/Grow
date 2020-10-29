@@ -6,6 +6,7 @@ import com.epam.model.Department;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -19,7 +20,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Profile("jdbc")
+@Repository("departmentDao")
 public class DepartmentDaoImpl implements DepartmentDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -58,13 +60,13 @@ public class DepartmentDaoImpl implements DepartmentDao {
         return Optional.ofNullable(DataAccessUtils.uniqueResult(namedParameterJdbcTemplate.query(selectById, map, new DepartmentMapper())));
     }
 
-    public Department update(Department department, Integer id) throws Exception {
-        LOGGER.trace("Update department with id: {} to {}", id, department);
+    public int update(Department department) {
+        LOGGER.trace("Update department {}", department);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("name", department.getName());
-        map.addValue("id", id);
+        map.addValue("id", department.getId());
         namedParameterJdbcTemplate.update(update ,map);
-        return getById(id).orElseThrow(Exception::new);
+        return department.getId();
     }
 
     public void delete(Integer id) {
@@ -74,7 +76,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         namedParameterJdbcTemplate.update(delete, map);
     }
 
-    public Department add(Department department) throws Exception {
+    public int add(Department department) {
         LOGGER.trace("Add department: {}", department);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("name", department.getName());
@@ -82,8 +84,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         namedParameterJdbcTemplate.update(insert ,map, keyHolder);
         Number number = keyHolder.getKey();
         assert number != null;
-        Integer key = number.intValue();
-        return getById(key).orElseThrow(Exception::new);
+        return number.intValue();
     }
 
     private static class DepartmentMapper implements RowMapper<Department> {

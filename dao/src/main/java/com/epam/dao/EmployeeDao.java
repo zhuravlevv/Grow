@@ -12,9 +12,9 @@ public interface EmployeeDao {
 
     public Optional<Employee> getById(Integer id);
 
-    public Employee add(Employee employee) throws Exception;
+    public int add(Employee employee);
 
-    public Employee update(Employee employee, Integer id) throws Exception;
+    public int update(Employee employee);
 
     public void delete(Integer id);
 

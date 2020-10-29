@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,18 +34,23 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentDao.getById(id);
     }
 
+    @Transactional
     @Override
     public Department add(Department department) throws Exception {
         LOGGER.trace("add(department: {})", department);
-        return departmentDao.add(department);
+        int id = departmentDao.add(department);
+        return getById(id).orElseThrow(Exception::new);
     }
 
+    @Transactional
     @Override
-    public Department update(Department newDepartment, Integer id) throws Exception {
-        LOGGER.trace("update(department: {} , id: {})", newDepartment, id);
-        return departmentDao.update(newDepartment, id);
+    public Department update(Department newDepartment) throws Exception {
+        LOGGER.trace("update(department: {})", newDepartment);
+        departmentDao.update(newDepartment);
+        return getById(newDepartment.getId()).orElseThrow(Exception::new);
     }
 
+    @Transactional
     @Override
     public void delete(Integer id) {
         LOGGER.trace("delete (id: {})", id);

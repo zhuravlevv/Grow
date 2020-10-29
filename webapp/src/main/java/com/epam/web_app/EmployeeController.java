@@ -63,7 +63,7 @@ public class EmployeeController {
             return "employee";
         } else {
             try {
-                employeeService.update(employee, id);
+                employeeService.update(employee);
             }
             catch (Exception e)
             {

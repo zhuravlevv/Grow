@@ -58,7 +58,7 @@ public class DepartmentController {
             return ResponseEntity.badRequest().body(null);
         }
         try {
-            return ResponseEntity.ok(departmentService.update(newDepartment, id));
+            return ResponseEntity.ok(departmentService.update(newDepartment));
         }
         catch (Exception e){
             e.printStackTrace();

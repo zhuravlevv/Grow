@@ -7,13 +7,13 @@ import java.util.Optional;
 
 public interface DepartmentDao {
 
-    List<Department> getAll();
+    public List<Department> getAll();
 
-    Optional<Department> getById(Integer id);
+    public Optional<Department> getById(Integer id);
 
-    Department update(Department department , Integer id) throws Exception;
+    public int update(Department department);
 
-    void delete(Integer id);
+    public void delete(Integer id);
 
-    Department add(Department department) throws Exception;
+    public int add(Department department);
 }

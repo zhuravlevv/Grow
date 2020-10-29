@@ -13,7 +13,7 @@ public interface DepartmentService {
 
     public Department add(Department department) throws Exception;
 
-    public Department update(Department newDepartment, Integer id) throws Exception;
+    public Department update(Department newDepartment) throws Exception;
 
     public void delete(Integer id);
 }

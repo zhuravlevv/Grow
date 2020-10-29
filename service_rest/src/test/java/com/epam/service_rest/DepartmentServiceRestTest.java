@@ -144,7 +144,8 @@ public class DepartmentServiceRestTest {
                 );
 
         // when
-        Department result = departmentService.update(department, 1);
+        department.setId(1);
+        Department result = departmentService.update(department);
         Optional<Department> updatedDepartmentOptional = departmentService.getById(id);
 
         // then

@@ -63,7 +63,7 @@ public class EmployeeServiceRest implements EmployeeService {
     }
 
     @Override
-    public Employee update(Employee newEmployee, Integer id) {
+    public Employee update(Employee newEmployee) {
 
         LOGGER.debug("update({})", newEmployee);
 
@@ -71,7 +71,7 @@ public class EmployeeServiceRest implements EmployeeService {
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<Employee> entity = new HttpEntity<>(newEmployee, headers);
         System.out.println(entity);
-        ResponseEntity<Employee> result = restTemplate.exchange(url + "/" + id, HttpMethod.PUT, entity, Employee.class);
+        ResponseEntity<Employee> result = restTemplate.exchange(url + "/" + newEmployee.getId(), HttpMethod.PUT, entity, Employee.class);
         return result.getBody();
     }
 

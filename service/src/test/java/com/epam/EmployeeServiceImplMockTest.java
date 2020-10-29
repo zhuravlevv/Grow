@@ -58,7 +58,8 @@ public class EmployeeServiceImplMockTest {
         employee.setId(1);
 
         try {
-            Mockito.when(employeeDao.add(Mockito.any(Employee.class))).thenReturn(employee);
+            Mockito.when(employeeDao.add(Mockito.any(Employee.class))).thenReturn(1);
+            Mockito.when(employeeDao.getById(1)).thenReturn(Optional.of(employee));
             Employee returnedEmployee = employeeService.add(employee);
             assertEquals(employee, returnedEmployee);
         } catch (Exception e) {
@@ -71,10 +72,11 @@ public class EmployeeServiceImplMockTest {
         Employee employee = new Employee("firstName", "lastName", 200.00, 1);
         employee.setId(1);
         Employee newEmployee = new Employee("firstNameNew", "lastNameNew", 200.00, 1);
-
+        newEmployee.setId(1);
         try {
-            Mockito.when(employeeDao.update(Mockito.any(Employee.class), Mockito.anyInt())).thenReturn(newEmployee);
-            Employee returnedEmployee = employeeService.update(newEmployee, 1);
+            Mockito.when(employeeDao.update(Mockito.any(Employee.class))).thenReturn(1);
+            Mockito.when(employeeDao.getById(1)).thenReturn(Optional.of(newEmployee));
+            Employee returnedEmployee = employeeService.update(newEmployee);
             assertEquals(newEmployee, returnedEmployee);
         } catch (Exception e) {
             e.printStackTrace();

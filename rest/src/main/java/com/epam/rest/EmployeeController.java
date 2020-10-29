@@ -52,13 +52,13 @@ public class EmployeeController {
     }
 
     @PutMapping("/employee/{id}")
-    public ResponseEntity<Employee> update(@RequestBody Employee newEmployee,@PathVariable Integer id){
-        LOGGER.trace("update({}, {})", newEmployee, id);
+    public ResponseEntity<Employee> update(@RequestBody Employee newEmployee){
+        LOGGER.trace("update({})", newEmployee);
         if(newEmployee == null){
             return ResponseEntity.badRequest().body(null);
         }
         try {
-            return ResponseEntity.ok(employeeService.update(newEmployee, id));
+            return ResponseEntity.ok(employeeService.update(newEmployee));
         }
         catch (Exception e){
             e.printStackTrace();

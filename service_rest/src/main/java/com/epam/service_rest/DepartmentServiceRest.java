@@ -54,14 +54,14 @@ public class DepartmentServiceRest implements DepartmentService {
     }
 
     @Override
-    public Department update(Department newDepartment, Integer id) {
+    public Department update(Department newDepartment) {
         LOGGER.debug("update({})", newDepartment);
         // restTemplate.put(url, department);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<Department> entity = new HttpEntity<>(newDepartment, headers);
-        ResponseEntity<Department> result = restTemplate.exchange(url + "/" + id, HttpMethod.PUT, entity, Department.class);
+        ResponseEntity<Department> result = restTemplate.exchange(url + "/" + newDepartment.getId(), HttpMethod.PUT, entity, Department.class);
         return result.getBody();
     }
 

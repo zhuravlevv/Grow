@@ -100,7 +100,7 @@ public class DepartmentController {
         }
         else {
             try {
-                departmentService.update(department, id);
+                departmentService.update(department);
             } catch (Exception e) {
                 e.printStackTrace();
             }

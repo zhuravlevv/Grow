@@ -167,7 +167,7 @@ public class EmployeeServiceRestTest {
                 );
 
         // when
-        Employee result = employeeService.update(employee, 1);
+        Employee result = employeeService.update(employee);
         Optional<Employee> updatedEmployeeOptional = employeeService.getById(id);
 
         // then
