@@ -1,13 +1,22 @@
 package com.epam.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "employee")
 public class Employee {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     private String firstName;
+
     private String lastName;
+
     private Double salary;
+
     private Integer departmentId;
 
     public Integer getId() {
