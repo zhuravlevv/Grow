@@ -58,7 +58,8 @@ public class DepartmentServiceImplMockTest {
         department.setId(1);
 
         try {
-            Mockito.when(departmentDao.add(Mockito.any(Department.class))).thenReturn(department);
+            Mockito.when(departmentDao.add(Mockito.any(Department.class))).thenReturn(1);
+            Mockito.when(departmentDao.getById(1)).thenReturn(Optional.of(department));
             Department returnedDepartment = departmentService.add(department);
             assertEquals(department, returnedDepartment);
         } catch (Exception e) {
@@ -73,7 +74,8 @@ public class DepartmentServiceImplMockTest {
         Department newDepartment = new Department("newDepartment");
 
         try {
-            Mockito.when(departmentDao.update(Mockito.any(Department.class), Mockito.anyInt())).thenReturn(newDepartment);
+            Mockito.when(departmentDao.update(Mockito.any(Department.class), Mockito.anyInt())).thenReturn(1);
+            Mockito.when(departmentDao.getById(1)).thenReturn(Optional.of(newDepartment));
             Department returnedDepartment = departmentService.update(newDepartment, 1);
             assertEquals(newDepartment, returnedDepartment);
         } catch (Exception e) {

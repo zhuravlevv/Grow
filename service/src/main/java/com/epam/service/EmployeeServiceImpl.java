@@ -36,13 +36,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee add(Employee employee) throws Exception {
         LOGGER.trace("add(employee: {})", employee);
-        return employeeDao.add(employee);
+        int id = employeeDao.add(employee);
+        return getById(id).orElseThrow(Exception::new);
     }
 
     @Override
     public Employee update(Employee newEmployee, Integer id) throws Exception {
         LOGGER.trace("update(newEmployee: {}, id: {})", newEmployee, id);
-        return employeeDao.update(newEmployee, id);
+        employeeDao.update(newEmployee, id);
+        return getById(id).orElseThrow(Exception::new);
     }
 
     @Override

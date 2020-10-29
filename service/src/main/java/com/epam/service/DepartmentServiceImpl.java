@@ -36,13 +36,15 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public Department add(Department department) throws Exception {
         LOGGER.trace("add(department: {})", department);
-        return departmentDao.add(department);
+        int id = departmentDao.add(department);
+        return getById(id).orElseThrow(Exception::new);
     }
 
     @Override
     public Department update(Department newDepartment, Integer id) throws Exception {
         LOGGER.trace("update(department: {} , id: {})", newDepartment, id);
-        return departmentDao.update(newDepartment, id);
+        departmentDao.update(newDepartment, id);
+        return getById(id).orElseThrow(Exception::new);
     }
 
     @Override
