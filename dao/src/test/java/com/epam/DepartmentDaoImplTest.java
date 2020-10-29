@@ -32,8 +32,8 @@ public class DepartmentDaoImplTest {
     public void add() throws Exception {
         Department department = new Department();
         department.setName("department1");
-        Department resDepartment = departmentDao.add(department);
-        Department searchDepartment = departmentDao.getById(resDepartment.getId()).orElseThrow(Exception::new);
+        int resDepartment = departmentDao.add(department);
+        Department searchDepartment = departmentDao.getById(resDepartment).orElseThrow(Exception::new);
         assertEquals(searchDepartment, resDepartment);
     }
 
@@ -42,12 +42,12 @@ public class DepartmentDaoImplTest {
         Department department = new Department();
         department.setName("department");
 
-        Department addedDepartment = departmentDao.add(department);
+        int addedDepartment = departmentDao.add(department);
 
-        Department returnedDepartment = departmentDao.getById(addedDepartment.getId()).orElseThrow(Exception::new);
+        Department returnedDepartment = departmentDao.getById(addedDepartment).orElseThrow(Exception::new);
 
         assertEquals(returnedDepartment.getName(), "department");
-        assertEquals(returnedDepartment.getId(), addedDepartment.getId());
+        assertEquals(returnedDepartment.getId(), addedDepartment);
     }
 
     @Test
@@ -58,9 +58,9 @@ public class DepartmentDaoImplTest {
         Department department2 = new Department();
         department2.setName("department2");
 
-        Department addedDepartment = departmentDao.add(department1);
-        Department department = departmentDao.update(department2, addedDepartment.getId());
-
+        int addedDepartment = departmentDao.add(department1);
+        int departmentId = departmentDao.update(department2, addedDepartment);
+        Department department = departmentDao.getById(departmentId).orElseThrow(Exception::new);
         assertEquals(department.getName(), "department2");
     }
 
@@ -69,11 +69,11 @@ public class DepartmentDaoImplTest {
         Department department = new Department();
         department.setName("department");
 
-        Department addedDepartment = departmentDao.add(department);
+        int addedDepartment = departmentDao.add(department);
 
-        departmentDao.delete(addedDepartment.getId());
+        departmentDao.delete(addedDepartment);
 
-        assertFalse(departmentDao.getById(addedDepartment.getId()).isPresent());
+        assertFalse(departmentDao.getById(addedDepartment).isPresent());
     }
 
 }
