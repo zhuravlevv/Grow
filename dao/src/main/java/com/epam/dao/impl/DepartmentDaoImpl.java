@@ -60,13 +60,13 @@ public class DepartmentDaoImpl implements DepartmentDao {
         return Optional.ofNullable(DataAccessUtils.uniqueResult(namedParameterJdbcTemplate.query(selectById, map, new DepartmentMapper())));
     }
 
-    public Department update(Department department, Integer id) throws Exception {
+    public int update(Department department, Integer id) {
         LOGGER.trace("Update department with id: {} to {}", id, department);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("name", department.getName());
         map.addValue("id", id);
         namedParameterJdbcTemplate.update(update ,map);
-        return getById(id).orElseThrow(Exception::new);
+        return id;
     }
 
     public void delete(Integer id) {
@@ -76,7 +76,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         namedParameterJdbcTemplate.update(delete, map);
     }
 
-    public Department add(Department department) throws Exception {
+    public int add(Department department) {
         LOGGER.trace("Add department: {}", department);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("name", department.getName());
@@ -84,8 +84,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         namedParameterJdbcTemplate.update(insert ,map, keyHolder);
         Number number = keyHolder.getKey();
         assert number != null;
-        Integer key = number.intValue();
-        return getById(key).orElseThrow(Exception::new);
+        return number.intValue();
     }
 
     private static class DepartmentMapper implements RowMapper<Department> {

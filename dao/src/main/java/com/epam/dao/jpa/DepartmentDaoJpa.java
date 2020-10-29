@@ -1,19 +1,40 @@
 package com.epam.dao.jpa;
 
+import com.epam.dao.DepartmentDao;
 import com.epam.model.Department;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Profile("jpa")
 @Repository("departmentDao")
-public interface DepartmentDaoJpa extends CrudRepository<Department, Integer> {
+public interface DepartmentDaoJpa extends CrudRepository<Department, Integer>, DepartmentDao {
 
+    @Query("select d from Department d")
     public List<Department> getAll();
-    public Department getById(Integer id);
-    public Department update(Integer id, Department newDepartment);
-    public Department create(Department department);
-    public void deleteById(Integer id);
+
+    @Query("select d from Department d where d.id = ?1")
+    public Optional<Department> getById(@Param("id") Integer id);
+
+    @Modifying
+    @Query(value = "update department set name = :#{#newDepartment.name} where id = :#{#id}", nativeQuery = true)
+    @Transactional
+    public int update(@Param("newDepartment") Department department , @Param("id") Integer id) ;
+
+    @Modifying
+    @Query(value = "insert into department (name) values (:#{#department.name})", nativeQuery = true)
+    @Transactional
+    public int add(@Param("department") Department department);
+
+    @Modifying
+    @Query("delete from Department d where d.id = :#{#id}")
+    @Transactional
+    public void delete(@Param("id") Integer id);
 }
