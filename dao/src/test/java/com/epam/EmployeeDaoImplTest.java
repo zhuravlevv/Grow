@@ -54,8 +54,8 @@ public class EmployeeDaoImplTest {
         int addedEmployee = employeeDao.add(employee);
 
         Employee employee1 = new Employee("first_name1", "last_name", 100.0, 1);
-
-        employeeDao.update(employee1, addedEmployee);
+        employee1.setId(addedEmployee);
+        employeeDao.update(employee1);
 
         Employee searchedEmployee = employeeDao.getById(addedEmployee).orElseThrow(Exception::new);
 

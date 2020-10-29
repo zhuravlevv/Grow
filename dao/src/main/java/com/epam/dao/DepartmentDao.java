@@ -11,7 +11,7 @@ public interface DepartmentDao {
 
     public Optional<Department> getById(Integer id);
 
-    public int update(Department department , Integer id);
+    public int update(Department department);
 
     public void delete(Integer id);
 

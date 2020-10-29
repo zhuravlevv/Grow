@@ -59,7 +59,8 @@ public class DepartmentDaoImplTest {
         department2.setName("department2");
 
         int addedDepartment = departmentDao.add(department1);
-        int departmentId = departmentDao.update(department2, addedDepartment);
+        department2.setId(addedDepartment);
+        int departmentId = departmentDao.update(department2);
         Department department = departmentDao.getById(departmentId).orElseThrow(Exception::new);
         assertEquals(department.getName(), "department2");
     }

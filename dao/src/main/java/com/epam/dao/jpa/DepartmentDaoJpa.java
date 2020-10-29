@@ -24,17 +24,14 @@ public interface DepartmentDaoJpa extends CrudRepository<Department, Integer>, D
     public Optional<Department> getById(@Param("id") Integer id);
 
     @Modifying
-    @Query(value = "update department set name = :#{#newDepartment.name} where id = :#{#id}", nativeQuery = true)
-    @Transactional
-    public int update(@Param("newDepartment") Department department , @Param("id") Integer id) ;
+    @Query(value = "update department set name = :#{#newDepartment.name} where id = :#{#newDepartment.id}", nativeQuery = true)
+    public int update(@Param("newDepartment") Department department) ;
 
     @Modifying
     @Query(value = "insert into department (name) values (:#{#department.name})", nativeQuery = true)
-    @Transactional
     public int add(@Param("department") Department department);
 
     @Modifying
     @Query("delete from Department d where d.id = :#{#id}")
-    @Transactional
     public void delete(@Param("id") Integer id);
 }

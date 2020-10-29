@@ -69,14 +69,13 @@ public class DepartmentServiceImplMockTest {
 
     @Test
     public void update(){
-        Department department = new Department("department");
-        department.setId(1);
         Department newDepartment = new Department("newDepartment");
+        newDepartment.setId(1);
 
         try {
-            Mockito.when(departmentDao.update(Mockito.any(Department.class), Mockito.anyInt())).thenReturn(1);
+            Mockito.when(departmentDao.update(Mockito.any(Department.class))).thenReturn(1);
             Mockito.when(departmentDao.getById(1)).thenReturn(Optional.of(newDepartment));
-            Department returnedDepartment = departmentService.update(newDepartment, 1);
+            Department returnedDepartment = departmentService.update(newDepartment);
             assertEquals(newDepartment, returnedDepartment);
         } catch (Exception e) {
             e.printStackTrace();

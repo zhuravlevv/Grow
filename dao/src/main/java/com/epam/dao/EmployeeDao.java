@@ -14,7 +14,7 @@ public interface EmployeeDao {
 
     public int add(Employee employee);
 
-    public int update(Employee employee, Integer id);
+    public int update(Employee employee);
 
     public void delete(Integer id);
 

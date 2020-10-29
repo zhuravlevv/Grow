@@ -81,16 +81,16 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public int update(Employee employee, Integer id) {
-        LOGGER.trace("Update employee with id: {} to {}", id, employee);
+    public int update(Employee employee) {
+        LOGGER.trace("Update employee {}", employee);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("first_name", employee.getFirstName());
         map.addValue("last_name", employee.getLastName());
         map.addValue("salary", employee.getSalary());
         map.addValue("department_id", employee.getDepartmentId());
-        map.addValue("id", id);
+        map.addValue("id", employee.getId());
         namedParameterJdbcTemplate.update(update, map);
-        return id;
+        return employee.getId();
     }
 
     @Override

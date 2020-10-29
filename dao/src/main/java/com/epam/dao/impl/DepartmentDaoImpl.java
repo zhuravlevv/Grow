@@ -60,13 +60,13 @@ public class DepartmentDaoImpl implements DepartmentDao {
         return Optional.ofNullable(DataAccessUtils.uniqueResult(namedParameterJdbcTemplate.query(selectById, map, new DepartmentMapper())));
     }
 
-    public int update(Department department, Integer id) {
-        LOGGER.trace("Update department with id: {} to {}", id, department);
+    public int update(Department department) {
+        LOGGER.trace("Update department {}", department);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("name", department.getName());
-        map.addValue("id", id);
+        map.addValue("id", department.getId());
         namedParameterJdbcTemplate.update(update ,map);
-        return id;
+        return department.getId();
     }
 
     public void delete(Integer id) {
