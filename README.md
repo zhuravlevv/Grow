@@ -45,6 +45,18 @@ or
 cd rest
 java -jar -Dspring.profiles.active=prod target/rest-1.0-SNAPSHOT.jar
 ```
+#### JPA Profile
+Add "jpa" to profiles:
+```
+cd rest
+java -jar -Dspring.profiles.active="prod, jpa" target/rest-1.0-SNAPSHOT.jar
+```
+#### JDBC Profile
+Add "jdbc" to profiles:
+```
+cd rest
+java -jar -Dspring.profiles.active="dev, jdbc" target/rest-1.0-SNAPSHOT.jar
+```
 Application will be available at:
 
 ```
