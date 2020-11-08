@@ -36,10 +36,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Transactional
     @Override
-    public Department add(Department department) throws Exception {
+    public Department add(Department department) {
         LOGGER.trace("add(department: {})", department);
-        int id = departmentDao.add(department);
-        return getById(id).orElseThrow(Exception::new);
+        return departmentDao.save(department);
     }
 
     @Transactional

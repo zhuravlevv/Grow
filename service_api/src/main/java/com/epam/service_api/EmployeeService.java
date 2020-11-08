@@ -11,7 +11,7 @@ public interface EmployeeService {
 
     public Optional<Employee> getById(Integer id);
 
-    public Employee add(Employee employee) throws Exception;
+    public Employee add(Employee employee);
 
     public Employee update(Employee newEmployee) throws Exception;
 

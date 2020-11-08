@@ -15,5 +15,5 @@ public interface DepartmentDao {
 
     public void delete(Integer id);
 
-    public int add(Department department);
+    public Department save(Department department);
 }

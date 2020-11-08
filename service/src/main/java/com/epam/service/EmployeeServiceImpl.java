@@ -36,10 +36,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public Employee add(Employee employee) throws Exception {
+    public Employee add(Employee employee) {
         LOGGER.trace("add(employee: {})", employee);
-        int id = employeeDao.add(employee);
-        return getById(id).orElseThrow(Exception::new);
+        return employeeDao.save(employee);
     }
 
     @Override

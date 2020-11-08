@@ -27,9 +27,9 @@ public interface DepartmentDaoJpa extends CrudRepository<Department, Integer>, D
     @Query(value = "update department set name = :#{#newDepartment.name} where id = :#{#newDepartment.id}", nativeQuery = true)
     public int update(@Param("newDepartment") Department department) ;
 
-    @Modifying
-    @Query(value = "insert into department (name) values (:#{#department.name})", nativeQuery = true)
-    public int add(@Param("department") Department department);
+//    @Modifying
+//    @Query(value = "insert into department (name) values (:#{#department.name})", nativeQuery = true)
+//    public int add(@Param("department") Department department);
 
     @Modifying
     @Query("delete from Department d where d.id = :#{#id}")

@@ -66,7 +66,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public int add(Employee employee) {
+    public Employee save(Employee employee) {
         LOGGER.trace("Add employee: {}", employee);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("first_name", employee.getFirstName());
@@ -77,7 +77,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         namedParameterJdbcTemplate.update(insert, map, keyHolder);
         Number key = keyHolder.getKey();
         assert key != null;
-        return key.intValue();
+        return getById(key.intValue()).get();
     }
 
     @Override

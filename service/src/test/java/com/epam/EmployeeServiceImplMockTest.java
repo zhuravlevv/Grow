@@ -58,7 +58,7 @@ public class EmployeeServiceImplMockTest {
         employee.setId(1);
 
         try {
-            Mockito.when(employeeDao.add(Mockito.any(Employee.class))).thenReturn(1);
+            Mockito.when(employeeDao.save(Mockito.any(Employee.class))).thenReturn(employee);
             Mockito.when(employeeDao.getById(1)).thenReturn(Optional.of(employee));
             Employee returnedEmployee = employeeService.add(employee);
             assertEquals(employee, returnedEmployee);

@@ -31,9 +31,9 @@ public class EmployeeDaoImplTest {
     @Test
     public void getById() throws Exception {
         Employee employee = new Employee("first_name", "last_name", 100.0, 1);
-        int addedEmployee = employeeDao.add(employee);
+        Employee addedEmployee = employeeDao.save(employee);
 
-        Employee searchedEmployee = employeeDao.getById(addedEmployee).orElseThrow(Exception::new);
+        Employee searchedEmployee = employeeDao.getById(addedEmployee.getId()).orElseThrow(Exception::new);
 
         assertEquals(addedEmployee, searchedEmployee);
     }
@@ -41,9 +41,9 @@ public class EmployeeDaoImplTest {
     @Test
     public void add() throws Exception {
         Employee employee = new Employee("first_name", "last_name", 100.0, 1);
-        int addedEmployeeId = employeeDao.add(employee);
-        Employee addedEmployee = employeeDao.getById(addedEmployeeId).orElseThrow(Exception::new);
-        Employee searchedEmployee = employeeDao.getById(addedEmployeeId).orElseThrow(Exception::new);
+        Employee addedEmployeeId = employeeDao.save(employee);
+        Employee addedEmployee = employeeDao.getById(addedEmployeeId.getId()).orElseThrow(Exception::new);
+        Employee searchedEmployee = employeeDao.getById(addedEmployeeId.getId()).orElseThrow(Exception::new);
 
         assertEquals(addedEmployee, searchedEmployee);
     }
@@ -51,13 +51,13 @@ public class EmployeeDaoImplTest {
     @Test
     public void update() throws Exception {
         Employee employee = new Employee("first_name", "last_name", 100.0, 1);
-        int addedEmployee = employeeDao.add(employee);
+        Employee addedEmployee = employeeDao.save(employee);
 
         Employee employee1 = new Employee("first_name1", "last_name", 100.0, 1);
-        employee1.setId(addedEmployee);
+        employee1.setId(addedEmployee.getId());
         employeeDao.update(employee1);
 
-        Employee searchedEmployee = employeeDao.getById(addedEmployee).orElseThrow(Exception::new);
+        Employee searchedEmployee = employeeDao.getById(addedEmployee.getId()).orElseThrow(Exception::new);
 
         assertEquals(employee1.getFirstName(), searchedEmployee.getFirstName());
 
@@ -66,11 +66,11 @@ public class EmployeeDaoImplTest {
     @Test
     public void delete() throws Exception {
         Employee employee = new Employee("first_name", "last_name", 100.0, 1);
-        int addedEmployee = employeeDao.add(employee);
+        Employee addedEmployee = employeeDao.save(employee);
 
-        employeeDao.delete(addedEmployee);
+        employeeDao.delete(addedEmployee.getId());
 
-        assertFalse(employeeDao.getById(addedEmployee).isPresent());
+        assertFalse(employeeDao.getById(addedEmployee.getId()).isPresent());
     }
 
     @Test

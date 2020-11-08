@@ -58,7 +58,7 @@ public class DepartmentServiceImplMockTest {
         department.setId(1);
 
         try {
-            Mockito.when(departmentDao.add(Mockito.any(Department.class))).thenReturn(1);
+            Mockito.when(departmentDao.save(Mockito.any(Department.class))).thenReturn(department);
             Mockito.when(departmentDao.getById(1)).thenReturn(Optional.of(department));
             Department returnedDepartment = departmentService.add(department);
             assertEquals(department, returnedDepartment);
