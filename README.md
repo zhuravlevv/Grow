@@ -63,7 +63,13 @@ Application will be available at:
 http://localhost:8081
 ```
 
-#### Available REST endpoints:	
+#### Available REST endpoints:
+##### Faker
+fill the application with test data
+```	
+curl --request GET 'http://localhost:8080/gen?amount=15'	
+```
+where "amount" - is the number of departments that you want to generate
 ##### Department_dto	
 find all departments with average salary	
 ```	
