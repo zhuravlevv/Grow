@@ -48,7 +48,7 @@ public class FakerServiceImpl implements FakerService {
                     Name name = faker.name();
                     String firstName = name.firstName();
                     String lastName = name.lastName();
-                    double salary = faker.random().nextDouble();
+                    double salary = faker.random().nextDouble() * 1000;
                     Employee employee = new Employee(firstName, lastName, salary, addedDepartment.getId());
                     employeeService.add(employee);
                 }
