@@ -12,7 +12,7 @@ public interface EmployeeDao {
 
     public Optional<Employee> getById(Integer id);
 
-    public int add(Employee employee);
+    public Employee save(Employee employee);
 
     public int update(Employee employee);
 

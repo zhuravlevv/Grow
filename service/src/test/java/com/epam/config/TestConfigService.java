@@ -3,15 +3,19 @@ package com.epam.config;
 import com.epam.dao.DepartmentDao;
 import com.epam.dao.DepartmentDtoDao;
 import com.epam.dao.EmployeeDao;
+import com.epam.dao.config.DataAccessAnnotationProcessor;
 import com.epam.dao.impl.DepartmentDaoImpl;
 import com.epam.dao.impl.DepartmentDtoDaoImpl;
 import com.epam.dao.impl.EmployeeDaoImpl;
 import com.epam.service.DepartmentDtoServiceImpl;
 import com.epam.service.DepartmentServiceImpl;
 import com.epam.service.EmployeeServiceImpl;
+import com.epam.service.FakerServiceImpl;
 import com.epam.service_api.DepartmentDtoService;
 import com.epam.service_api.DepartmentService;
 import com.epam.service_api.EmployeeService;
+import com.epam.service_api.FakerService;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +25,17 @@ import javax.sql.DataSource;
 
 @Configuration
 public class TestConfigService {
+
+
+    @Bean
+    public BeanPostProcessor lazyBeanPostProcessor() {
+        return new DataAccessAnnotationProcessor();
+    }
+
+    @Bean
+    public FakerService fakerService(){
+        return new FakerServiceImpl(departmentService(), employeeService());
+    }
 
     @Bean
     public DepartmentService departmentService(){

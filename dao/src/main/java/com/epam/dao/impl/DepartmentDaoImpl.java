@@ -76,7 +76,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         namedParameterJdbcTemplate.update(delete, map);
     }
 
-    public int add(Department department) {
+    public Department save(Department department) {
         LOGGER.trace("Add department: {}", department);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("name", department.getName());
@@ -84,7 +84,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         namedParameterJdbcTemplate.update(insert ,map, keyHolder);
         Number number = keyHolder.getKey();
         assert number != null;
-        return number.intValue();
+        return getById(number.intValue()).get();
     }
 
     private static class DepartmentMapper implements RowMapper<Department> {

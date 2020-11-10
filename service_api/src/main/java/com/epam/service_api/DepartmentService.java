@@ -11,7 +11,7 @@ public interface DepartmentService {
 
     public Optional<Department> getById(Integer id);
 
-    public Department add(Department department) throws Exception;
+    public Department add(Department department);
 
     public Department update(Department newDepartment) throws Exception;
 

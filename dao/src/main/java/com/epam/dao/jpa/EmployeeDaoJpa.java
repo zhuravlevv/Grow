@@ -24,12 +24,6 @@ public interface EmployeeDaoJpa extends CrudRepository<Employee, Integer>, Emplo
     public Optional<Employee> getById(@Param("id") Integer id);
 
     @Modifying
-    @Query(value = "insert into employee (first_name, last_name, salary, department_id) values" +
-            " (:#{#employee.firstName}, :#{#employee.lastName}, :#{#employee.salary}, :#{#employee.departmentId})"
-            , nativeQuery = true)
-    public int add(@Param("employee") Employee employee);
-
-    @Modifying
     @Query(value = "update employee set first_name = :#{#employee.firstName}, last_name=:#{#employee.lastName}, " +
             " salary = :#{#employee.salary}, department_id=:#{#employee.departmentId} " +
             " where id = :#{#employee.id}", nativeQuery = true)
