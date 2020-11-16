@@ -1,7 +1,7 @@
 package com.epam.rest;
 
 import com.epam.model.Department;
-import com.epam.rest.exception.DepartmentNotFoundException;
+import com.epam.service.exception.DepartmentNotFoundException;
 import com.epam.service_api.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,12 +28,14 @@ public class DepartmentController {
     @GetMapping
     public ResponseEntity<List<Department>> getAll(){
         LOGGER.trace("getAll()");
+
         return ResponseEntity.ok(departmentService.getAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Department> getById(@PathVariable Integer id){
         LOGGER.trace("getById({})", id);
+
         return ResponseEntity.ok(departmentService.getById(id).orElseThrow(()->new DepartmentNotFoundException(id)));
     }
 
@@ -41,34 +43,22 @@ public class DepartmentController {
     public ResponseEntity<Department> add(@RequestBody Department department){
         LOGGER.trace("add({})", department);
 
-        try {
-            Department createdDepartment = departmentService.add(department);
-            return ResponseEntity.created(URI.create("/deapartment/" + createdDepartment.getId()))
-                    .body(createdDepartment);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        return ResponseEntity.badRequest().body(null);
+        Department createdDepartment = departmentService.add(department);
+        return ResponseEntity.created(URI.create("/deapartment/" + createdDepartment.getId()))
+                .body(createdDepartment);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Department> update(@PathVariable Integer id, @RequestBody Department newDepartment){
-        if(newDepartment == null){
-            return ResponseEntity.badRequest().body(null);
-        }
-        try {
-            return ResponseEntity.ok(departmentService.update(newDepartment));
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+    public ResponseEntity<Department> update(@RequestBody Department newDepartment){
+        LOGGER.trace("update({})", newDepartment);
 
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(departmentService.update(newDepartment));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Department> delete(@PathVariable Integer id){
+        LOGGER.trace("delete({})", id);
+
         departmentService.delete(id);
         return ResponseEntity.noContent().build();
     }

@@ -2,9 +2,12 @@ package com.epam.service;
 
 import com.epam.dao.EmployeeDao;
 import com.epam.model.Employee;
+import com.epam.service.exception.EmployeeNotFoundException;
+import com.epam.service.exception.GlobalServiceException;
 import com.epam.service_api.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -38,15 +41,26 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Transactional
     public Employee add(Employee employee) {
         LOGGER.trace("add(employee: {})", employee);
-        return employeeDao.save(employee);
+        try {
+            return employeeDao.save(employee);
+        }
+        catch (DataAccessException e){
+            throw new GlobalServiceException("Couldn't save employee", e);
+        }
     }
 
     @Override
     @Transactional
-    public Employee update(Employee newEmployee) throws Exception {
+    public Employee update(Employee newEmployee) {
         LOGGER.trace("update(newEmployee: {})", newEmployee);
-        employeeDao.update(newEmployee);
-        return getById(newEmployee.getId()).orElseThrow(Exception::new);
+        try {
+            employeeDao.update(newEmployee);
+            return getById(newEmployee.getId())
+                    .orElseThrow(() -> new EmployeeNotFoundException(newEmployee.getId()));
+        }
+        catch (DataAccessException e){
+            throw new GlobalServiceException("Couldn't save employee", e);
+        }
     }
 
     @Override

@@ -13,7 +13,7 @@ public interface EmployeeService {
 
     public Employee add(Employee employee);
 
-    public Employee update(Employee newEmployee) throws Exception;
+    public Employee update(Employee newEmployee);
 
     public void delete(Integer id);
 

@@ -2,9 +2,13 @@ package com.epam.service;
 
 import com.epam.dao.DepartmentDao;
 import com.epam.model.Department;
+import com.epam.service.exception.DepartmentNotFoundException;
+import com.epam.service.exception.EmployeeNotFoundException;
+import com.epam.service.exception.GlobalServiceException;
 import com.epam.service_api.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -38,15 +42,26 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public Department add(Department department) {
         LOGGER.trace("add(department: {})", department);
-        return departmentDao.save(department);
+        try {
+            return departmentDao.save(department);
+        }
+        catch (DataAccessException e){
+            throw new GlobalServiceException("Couldn't save department", e);
+        }
     }
 
     @Transactional
     @Override
-    public Department update(Department newDepartment) throws Exception {
+    public Department update(Department newDepartment) {
         LOGGER.trace("update(department: {})", newDepartment);
-        departmentDao.update(newDepartment);
-        return getById(newDepartment.getId()).orElseThrow(Exception::new);
+        try {
+            departmentDao.update(newDepartment);
+            return getById(newDepartment.getId())
+                    .orElseThrow(() -> new DepartmentNotFoundException(newDepartment.getId()));
+        }
+        catch (DataAccessException e){
+            throw new GlobalServiceException("Couldn't save department", e);
+        }
     }
 
     @Transactional

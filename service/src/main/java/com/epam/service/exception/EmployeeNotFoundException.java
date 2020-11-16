@@ -1,4 +1,4 @@
-package com.epam.rest.exception;
+package com.epam.service.exception;
 
 public class EmployeeNotFoundException extends RuntimeException{
 
