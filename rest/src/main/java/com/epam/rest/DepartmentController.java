@@ -44,7 +44,7 @@ public class DepartmentController {
         LOGGER.trace("add({})", department);
 
         Department createdDepartment = departmentService.add(department);
-        return ResponseEntity.created(URI.create("/deapartment/" + createdDepartment.getId()))
+        return ResponseEntity.created(URI.create("department/" + createdDepartment.getId()))
                 .body(createdDepartment);
     }
 
