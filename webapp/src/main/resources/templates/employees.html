@@ -49,6 +49,22 @@
                     <i class="fa fa-plus"></i> <span
                         class="d-none d-sm-inline">Add</span></a>
             </li>
+
+            <li class="nav-item">
+                <div class="dropdown">
+                    <a class="btn btn-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Excel">
+                        <i class="fa fa-file-excel-o"></i>
+                        Excel
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a id="export_xlsx" class="dropdown-item" href="http://localhost:8080/excel/employee">Save
+                            in xlsx</a>
+                        <a id="import_xlsx" class="dropdown-item" href="#" data-toggle="modal" data-target="#uploadDialog">Upload
+                            from xlsx</a>
+                    </div>
+                </div>
+            </li>
         </ul>
     </nav>
 </header>
@@ -124,6 +140,39 @@
     <hr/>
     <p class="text-center">&copy; 2020</p>
 </footer>
+
+<!--Uploading from excel -->
+<div class="modal fade  bd-example-modal-xl" id="uploadDialog" tabindex="-1"
+     role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <h5>Upload file</h5>
+                <form id="uploadForm" method="post" th:action="@{http://localhost:8080/excel/employee}"
+                      enctype="multipart/form-data">
+                    <div class="uploadInput">
+                        <div class="form-group">
+                            <input type="file" name="file" id="file" class="input-file">
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a id="saveFileBtn"
+                       tabindex="1"
+                       th:onclick="@{document.forms['uploadForm'].submit(); return false;}"
+                       class="btn btn-primary"
+                       title="Upload cars"
+                       data-toggle="tooltip"
+                       data-placement="top"
+                       data-dismiss="modal">
+                        <i class="d-none d-sm-inline fa fa-save"></i> Save</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Confirm delete Modal -->
 <div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog"
