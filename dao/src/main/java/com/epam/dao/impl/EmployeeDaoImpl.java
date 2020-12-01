@@ -52,13 +52,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public List<Employee> getAll() {
+    public List<Employee> findAll() {
         LOGGER.trace("Get all employees");
         return namedParameterJdbcTemplate.query(selectAll, new EmployeeMapper());
     }
 
     @Override
-    public Optional<Employee> getById(Integer id) {
+    public Optional<Employee> findById(Integer id) {
         LOGGER.trace("Get employee with id = {}", id);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("id",id);
@@ -77,7 +77,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         namedParameterJdbcTemplate.update(insert, map, keyHolder);
         Number key = keyHolder.getKey();
         assert key != null;
-        return getById(key.intValue()).get();
+        return findById(key.intValue()).get();
     }
 
     @Override
@@ -94,7 +94,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void deleteById(Integer id) {
         LOGGER.trace("Delete employee with id: {}", id);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("id", id);
@@ -102,7 +102,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public List<Employee> getByDepartmentId(Integer id) {
+    public List<Employee> findByDepartmentId(Integer id) {
         LOGGER.trace("Get all by department id");
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("department_id", id);

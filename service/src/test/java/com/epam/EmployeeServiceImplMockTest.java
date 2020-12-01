@@ -31,7 +31,7 @@ public class EmployeeServiceImplMockTest {
     @Test
     public void getAll(){
 
-        Mockito.when(employeeDao.getAll()).thenReturn(new ArrayList<>());
+        Mockito.when(employeeDao.findAll()).thenReturn(new ArrayList<>());
         List<Employee> employees = employeeService.getAll();
 
         assertNotNull(employees);
@@ -41,7 +41,7 @@ public class EmployeeServiceImplMockTest {
     public void getById() {
         Employee employee = new Employee("firstName", "lastName", 200.00, 1);
         employee.setId(1);
-        Mockito.when(employeeDao.getById(1)).thenReturn(Optional.of(employee));
+        Mockito.when(employeeDao.findById(1)).thenReturn(Optional.of(employee));
 
         Optional<Employee> returnedEmployee = employeeService.getById(1);
 
@@ -59,7 +59,7 @@ public class EmployeeServiceImplMockTest {
 
         try {
             Mockito.when(employeeDao.save(Mockito.any(Employee.class))).thenReturn(employee);
-            Mockito.when(employeeDao.getById(1)).thenReturn(Optional.of(employee));
+            Mockito.when(employeeDao.findById(1)).thenReturn(Optional.of(employee));
             Employee returnedEmployee = employeeService.add(employee);
             assertEquals(employee, returnedEmployee);
         } catch (Exception e) {
@@ -75,7 +75,7 @@ public class EmployeeServiceImplMockTest {
         newEmployee.setId(1);
         try {
             Mockito.when(employeeDao.update(Mockito.any(Employee.class))).thenReturn(1);
-            Mockito.when(employeeDao.getById(1)).thenReturn(Optional.of(newEmployee));
+            Mockito.when(employeeDao.findById(1)).thenReturn(Optional.of(newEmployee));
             Employee returnedEmployee = employeeService.update(newEmployee);
             assertEquals(newEmployee, returnedEmployee);
         } catch (Exception e) {

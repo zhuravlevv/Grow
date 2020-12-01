@@ -4,7 +4,10 @@ import com.epam.model.Department;
 import com.epam.service.exception.GlobalServiceException;
 import com.epam.service_api.DepartmentService;
 import com.epam.service_api.ExcelService;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -67,8 +70,7 @@ public class DepartmentExcelServiceImpl implements ExcelService {
         List<Department> departments = departmentService.getAll();
 
         int rowNumber = 1;
-        for (Department department:
-             departments) {
+        for (Department department: departments) {
             Row row = sheet.createRow(rowNumber++);
 
             row.createCell(0).setCellValue(department.getId());

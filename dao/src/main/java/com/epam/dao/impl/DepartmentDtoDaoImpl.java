@@ -31,7 +31,7 @@ public class DepartmentDtoDaoImpl implements DepartmentDtoDao {
     }
 
     @Override
-    public List<DepartmentDto> getAllWithAvgSalary() {
+    public List<DepartmentDto> findAllWithAvgSalary() {
         LOGGER.trace("Get all DepartmentDto with average salary");
         return namedParameterJdbcTemplate.query(selectAllWithAvgSalary, new DepartmentDtoMapper());
     }

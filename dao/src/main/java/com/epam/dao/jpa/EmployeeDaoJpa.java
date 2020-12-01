@@ -17,22 +17,10 @@ import java.util.Optional;
 @Repository("employeeDao")
 public interface EmployeeDaoJpa extends CrudRepository<Employee, Integer>, EmployeeDao {
 
-    @Query("select e from Employee  e")
-    public List<Employee> getAll();
-
-    @Query("select e from Employee e where e.id=:#{#id}")
-    public Optional<Employee> getById(@Param("id") Integer id);
-
     @Modifying
-    @Query(value = "update employee set first_name = :#{#employee.firstName}, last_name=:#{#employee.lastName}, " +
-            " salary = :#{#employee.salary}, department_id=:#{#employee.departmentId} " +
-            " where id = :#{#employee.id}", nativeQuery = true)
+    @Query(value = "update Employee e set e.firstName = :#{#employee.firstName}, e.lastName=:#{#employee.lastName}, " +
+            " e.salary = :#{#employee.salary}, e.departmentId=:#{#employee.departmentId} " +
+            " where e.id = :#{#employee.id}")
     public int update(@Param("employee") Employee employee);
 
-    @Modifying
-    @Query("delete from Employee  e where e.id=:#{#id}")
-    public void delete(@Param("id") Integer id);
-
-    @Query("select e from Employee e where e.departmentId=:#{#id}")
-    public List<Employee> getByDepartmentId(@Param("id") Integer id);
 }

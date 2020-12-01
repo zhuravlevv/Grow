@@ -23,6 +23,6 @@ public class DepartmentDtoServiceImpl implements DepartmentDtoService {
     @Override
     public List<DepartmentDto> getAllWithAvgSalary() {
         LOGGER.trace("Get all DepartmentsDto with average salary");
-        return departmentDtoDao.getAllWithAvgSalary();
+        return departmentDtoDao.findAllWithAvgSalary();
     }
 }

@@ -24,7 +24,7 @@ public class DepartmentDaoImplTest {
 
     @Test
     public void getAll(){
-        List<Department> departments = departmentDao.getAll();
+        List<Department> departments = departmentDao.findAll();
         assertNotNull(departments);
     }
 
@@ -33,7 +33,7 @@ public class DepartmentDaoImplTest {
         Department department = new Department();
         department.setName("department1");
         Department resDepartment = departmentDao.save(department);
-        Department searchDepartment = departmentDao.getById(resDepartment.getId()).orElseThrow(Exception::new);
+        Department searchDepartment = departmentDao.findById(resDepartment.getId()).orElseThrow(Exception::new);
         assertEquals(searchDepartment, resDepartment);
     }
 
@@ -44,7 +44,7 @@ public class DepartmentDaoImplTest {
 
         Department addedDepartment = departmentDao.save(department);
 
-        Department returnedDepartment = departmentDao.getById(addedDepartment.getId()).orElseThrow(Exception::new);
+        Department returnedDepartment = departmentDao.findById(addedDepartment.getId()).orElseThrow(Exception::new);
 
         assertEquals(returnedDepartment.getName(), "department");
         assertEquals(returnedDepartment.getId(), addedDepartment.getId());
@@ -61,7 +61,7 @@ public class DepartmentDaoImplTest {
         Department addedDepartment = departmentDao.save(department1);
         department2.setId(addedDepartment.getId());
         int departmentId = departmentDao.update(department2);
-        Department department = departmentDao.getById(departmentId).orElseThrow(Exception::new);
+        Department department = departmentDao.findById(departmentId).orElseThrow(Exception::new);
         assertEquals(department.getName(), "department2");
     }
 
@@ -72,9 +72,9 @@ public class DepartmentDaoImplTest {
 
         Department addedDepartment = departmentDao.save(department);
 
-        departmentDao.delete(addedDepartment.getId());
+        departmentDao.deleteById(addedDepartment.getId());
 
-        assertFalse(departmentDao.getById(addedDepartment.getId()).isPresent());
+        assertFalse(departmentDao.findById(addedDepartment.getId()).isPresent());
     }
 
 }

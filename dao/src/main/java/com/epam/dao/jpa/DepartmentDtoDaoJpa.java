@@ -14,9 +14,9 @@ import java.util.List;
 public interface DepartmentDtoDaoJpa extends CrudRepository<DepartmentDto, Integer>, DepartmentDtoDao {
 
     @Query(value = "select d.id as id, d.name as name, avg(e.salary) as average_salary" +
-            " from department d left join employee e" +
-            " on e.department_id = d.id" +
+            " from Department d join Employee e" +
+            " on e.departmentId = d.id" +
             " group by d.id, d.name" +
-            " order by d.id", nativeQuery = true)
-    public List<DepartmentDto> getAllWithAvgSalary();
+            " order by d.id")
+    public List<DepartmentDto> findAllWithAvgSalary();
 }

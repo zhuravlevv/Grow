@@ -29,7 +29,7 @@ public class DepartmentDtoServiceImplMockTest {
 
     @Test
     public void getAll(){
-        Mockito.when(departmentDtoDao.getAllWithAvgSalary()).thenReturn(new LinkedList<>());
+        Mockito.when(departmentDtoDao.findAllWithAvgSalary()).thenReturn(new LinkedList<>());
 
         List<DepartmentDto> departments = departmentDtoService.getAllWithAvgSalary();
         notNull(departments);

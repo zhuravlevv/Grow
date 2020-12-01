@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface DepartmentDtoDao {
 
-    public List<DepartmentDto> getAllWithAvgSalary();
+    public List<DepartmentDto> findAllWithAvgSalary();
 
 }

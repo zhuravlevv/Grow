@@ -1,6 +1,5 @@
 package com.epam.service;
 
-import com.epam.model.Department;
 import com.epam.model.Employee;
 import com.epam.service.exception.GlobalServiceException;
 import com.epam.service_api.EmployeeService;
@@ -72,8 +71,7 @@ public class EmployeeExcelServiceImpl implements ExcelService {
         List<Employee> employees = employeeService.getAll();
 
         int rowNumber = 1;
-        for (Employee employee:
-                employees) {
+        for (Employee employee: employees) {
             Row row = sheet.createRow(rowNumber++);
 
             row.createCell(0).setCellValue(employee.getId());

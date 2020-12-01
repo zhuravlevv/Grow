@@ -28,13 +28,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> getAll() {
         LOGGER.trace("getAll()");
-        return employeeDao.getAll();
+        return employeeDao.findAll();
     }
 
     @Override
     public Optional<Employee> getById(Integer id) {
         LOGGER.trace("getById(id: {})", id);
-        return employeeDao.getById(id);
+        return employeeDao.findById(id);
     }
 
     @Override
@@ -67,12 +67,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Transactional
     public void delete(Integer id) {
         LOGGER.trace("delete(id: {})", id);
-        employeeDao.delete(id);
+        employeeDao.deleteById(id);
     }
 
     @Override
     public List<Employee> getByDepartmentId(Integer id) {
         LOGGER.trace("getByDepartmentId({})", id);
-        return employeeDao.getByDepartmentId(id);
+        return employeeDao.findByDepartmentId(id);
     }
 }

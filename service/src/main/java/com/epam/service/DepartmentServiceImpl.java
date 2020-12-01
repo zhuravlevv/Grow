@@ -29,13 +29,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public List<Department> getAll() {
         LOGGER.trace("getAll()");
-        return departmentDao.getAll();
+        return departmentDao.findAll();
     }
 
     @Override
     public Optional<Department> getById(Integer id) {
         LOGGER.trace("getById(id:{})", id);
-        return departmentDao.getById(id);
+        return departmentDao.findById(id);
     }
 
     @Transactional
@@ -68,6 +68,6 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void delete(Integer id) {
         LOGGER.trace("delete (id: {})", id);
-        departmentDao.delete(id);
+        departmentDao.deleteById(id);
     }
 }

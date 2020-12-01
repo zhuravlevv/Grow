@@ -24,7 +24,7 @@ public class EmployeeDaoImplTest {
 
     @Test
     public void getAll(){
-        List<Employee> employees = employeeDao.getAll();
+        List<Employee> employees = employeeDao.findAll();
         assertNotNull(employees);
     }
 
@@ -33,7 +33,7 @@ public class EmployeeDaoImplTest {
         Employee employee = new Employee("first_name", "last_name", 100.0, 1);
         Employee addedEmployee = employeeDao.save(employee);
 
-        Employee searchedEmployee = employeeDao.getById(addedEmployee.getId()).orElseThrow(Exception::new);
+        Employee searchedEmployee = employeeDao.findById(addedEmployee.getId()).orElseThrow(Exception::new);
 
         assertEquals(addedEmployee, searchedEmployee);
     }
@@ -42,8 +42,8 @@ public class EmployeeDaoImplTest {
     public void add() throws Exception {
         Employee employee = new Employee("first_name", "last_name", 100.0, 1);
         Employee addedEmployeeId = employeeDao.save(employee);
-        Employee addedEmployee = employeeDao.getById(addedEmployeeId.getId()).orElseThrow(Exception::new);
-        Employee searchedEmployee = employeeDao.getById(addedEmployeeId.getId()).orElseThrow(Exception::new);
+        Employee addedEmployee = employeeDao.findById(addedEmployeeId.getId()).orElseThrow(Exception::new);
+        Employee searchedEmployee = employeeDao.findById(addedEmployeeId.getId()).orElseThrow(Exception::new);
 
         assertEquals(addedEmployee, searchedEmployee);
     }
@@ -57,7 +57,7 @@ public class EmployeeDaoImplTest {
         employee1.setId(addedEmployee.getId());
         employeeDao.update(employee1);
 
-        Employee searchedEmployee = employeeDao.getById(addedEmployee.getId()).orElseThrow(Exception::new);
+        Employee searchedEmployee = employeeDao.findById(addedEmployee.getId()).orElseThrow(Exception::new);
 
         assertEquals(employee1.getFirstName(), searchedEmployee.getFirstName());
 
@@ -68,15 +68,15 @@ public class EmployeeDaoImplTest {
         Employee employee = new Employee("first_name", "last_name", 100.0, 1);
         Employee addedEmployee = employeeDao.save(employee);
 
-        employeeDao.delete(addedEmployee.getId());
+        employeeDao.deleteById(addedEmployee.getId());
 
-        assertFalse(employeeDao.getById(addedEmployee.getId()).isPresent());
+        assertFalse(employeeDao.findById(addedEmployee.getId()).isPresent());
     }
 
     @Test
     public void getByDepartmentId() {
 
-        List<Employee> employees = employeeDao.getByDepartmentId(1);
+        List<Employee> employees = employeeDao.findByDepartmentId(1);
         assertNotNull(employees);
         assertTrue(employees.size() > 0);
     }

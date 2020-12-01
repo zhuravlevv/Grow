@@ -17,21 +17,8 @@ import java.util.Optional;
 @Repository("departmentDao")
 public interface DepartmentDaoJpa extends CrudRepository<Department, Integer>, DepartmentDao {
 
-    @Query("select d from Department d")
-    public List<Department> getAll();
-
-    @Query("select d from Department d where d.id = ?1")
-    public Optional<Department> getById(@Param("id") Integer id);
-
     @Modifying
-    @Query(value = "update department set name = :#{#newDepartment.name} where id = :#{#newDepartment.id}", nativeQuery = true)
+    @Query(value = "update Department d set d.name = :#{#newDepartment.name} where d.id = :#{#newDepartment.id}")
     public int update(@Param("newDepartment") Department department) ;
 
-//    @Modifying
-//    @Query(value = "insert into department (name) values (:#{#department.name})", nativeQuery = true)
-//    public int add(@Param("department") Department department);
-
-    @Modifying
-    @Query("delete from Department d where d.id = :#{#id}")
-    public void delete(@Param("id") Integer id);
 }

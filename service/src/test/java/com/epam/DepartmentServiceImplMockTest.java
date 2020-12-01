@@ -31,7 +31,7 @@ public class DepartmentServiceImplMockTest {
     @Test
     public void getAll(){
 
-        Mockito.when(departmentDao.getAll()).thenReturn(new ArrayList<>());
+        Mockito.when(departmentDao.findAll()).thenReturn(new ArrayList<>());
         List<Department> departments = departmentService.getAll();
 
         assertNotNull(departments);
@@ -41,7 +41,7 @@ public class DepartmentServiceImplMockTest {
     public void getById() {
         Department department = new Department("department");
         department.setId(1);
-        Mockito.when(departmentDao.getById(1)).thenReturn(Optional.of(department));
+        Mockito.when(departmentDao.findById(1)).thenReturn(Optional.of(department));
 
         Optional<Department> returnedDepartment = departmentService.getById(1);
 
@@ -59,7 +59,7 @@ public class DepartmentServiceImplMockTest {
 
         try {
             Mockito.when(departmentDao.save(Mockito.any(Department.class))).thenReturn(department);
-            Mockito.when(departmentDao.getById(1)).thenReturn(Optional.of(department));
+            Mockito.when(departmentDao.findById(1)).thenReturn(Optional.of(department));
             Department returnedDepartment = departmentService.add(department);
             assertEquals(department, returnedDepartment);
         } catch (Exception e) {
@@ -74,7 +74,7 @@ public class DepartmentServiceImplMockTest {
 
         try {
             Mockito.when(departmentDao.update(Mockito.any(Department.class))).thenReturn(1);
-            Mockito.when(departmentDao.getById(1)).thenReturn(Optional.of(newDepartment));
+            Mockito.when(departmentDao.findById(1)).thenReturn(Optional.of(newDepartment));
             Department returnedDepartment = departmentService.update(newDepartment);
             assertEquals(newDepartment, returnedDepartment);
         } catch (Exception e) {

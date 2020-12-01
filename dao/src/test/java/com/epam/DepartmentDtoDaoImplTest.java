@@ -24,7 +24,7 @@ public class DepartmentDtoDaoImplTest {
 
     @Test
     public void getAll(){
-        List<DepartmentDto> list = departmentDtoDao.getAllWithAvgSalary();
+        List<DepartmentDto> list = departmentDtoDao.findAllWithAvgSalary();
         assertNotNull(list);
     }
 

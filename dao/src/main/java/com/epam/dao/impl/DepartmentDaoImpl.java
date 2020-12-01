@@ -48,18 +48,21 @@ public class DepartmentDaoImpl implements DepartmentDao {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    public List<Department> getAll() {
+    @Override
+    public List<Department> findAll() {
         LOGGER.trace("Get all departments");
         return namedParameterJdbcTemplate.query(selectAll, new DepartmentMapper());
     }
 
-    public Optional<Department> getById(Integer id) {
+    @Override
+    public Optional<Department> findById(Integer id) {
         LOGGER.trace("Get department with id = {}", id);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("id", id);
         return Optional.ofNullable(DataAccessUtils.uniqueResult(namedParameterJdbcTemplate.query(selectById, map, new DepartmentMapper())));
     }
 
+    @Override
     public int update(Department department) {
         LOGGER.trace("Update department {}", department);
         MapSqlParameterSource map = new MapSqlParameterSource();
@@ -69,13 +72,15 @@ public class DepartmentDaoImpl implements DepartmentDao {
         return department.getId();
     }
 
-    public void delete(Integer id) {
+    @Override
+    public void deleteById(Integer id) {
         LOGGER.trace("Delete department with id: {}", id);
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("id", id);
         namedParameterJdbcTemplate.update(delete, map);
     }
 
+    @Override
     public Department save(Department department) {
         LOGGER.trace("Add department: {}", department);
         MapSqlParameterSource map = new MapSqlParameterSource();
@@ -84,7 +89,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         namedParameterJdbcTemplate.update(insert ,map, keyHolder);
         Number number = keyHolder.getKey();
         assert number != null;
-        return getById(number.intValue()).get();
+        return findById(number.intValue()).get();
     }
 
     private static class DepartmentMapper implements RowMapper<Department> {
