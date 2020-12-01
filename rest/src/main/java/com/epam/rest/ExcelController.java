@@ -2,6 +2,7 @@ package com.epam.rest;
 
 import com.epam.service_api.ExcelService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,12 @@ public class ExcelController {
 
     private final ExcelService departmentExcelService;
     private final ExcelService employeeExcelService;
+
+    @Value("${xmls.file.employee}")
+    private String employeeFileName;
+
+    @Value("${xmls.file.department}")
+    private String departmentFileName;
 
     public ExcelController(@Qualifier("departmentExcelService") ExcelService departmentExcelService, @Qualifier("employeeExcelService") ExcelService employeeExcelService) {
         this.departmentExcelService = departmentExcelService;
@@ -36,7 +43,7 @@ public class ExcelController {
         ByteArrayInputStream in = departmentExcelService.exportExcel();
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "attachment; filename=departments.xlsx");
+        headers.add("Content-Disposition", "attachment; filename=" + departmentFileName);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -57,7 +64,7 @@ public class ExcelController {
         ByteArrayInputStream in = employeeExcelService.exportExcel();
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "attachment; filename=employees.xlsx");
+        headers.add("Content-Disposition", "attachment; filename=" + employeeFileName);
 
         return ResponseEntity
                 .status(HttpStatus.OK)

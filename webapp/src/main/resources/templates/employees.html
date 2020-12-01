@@ -149,7 +149,7 @@
 
             <div class="modal-body">
                 <h5>Upload file</h5>
-                <form id="uploadForm" method="post" th:action="@{http://localhost:8080/excel/employee}"
+                <form id="uploadForm" method="post" th:action="${@environment.getProperty('excel.employee.path')}"
                       enctype="multipart/form-data">
                     <div class="uploadInput">
                         <div class="form-group">
