@@ -23,7 +23,7 @@
         <validation-api.version>2.0.1.Final</validation-api.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <thymeleaf.spring.boot.version>2.2.4.RELEASE</thymeleaf.spring.boot.version>
-        <org.springframework.boot.version>2.2.4.RELEASE</org.springframework.boot.version>
+        <org.springframework.boot.version>2.5.12</org.springframework.boot.version>
         <java.version>1.8</java.version>
         <logback.version>1.2.3</logback.version>
     </properties>
